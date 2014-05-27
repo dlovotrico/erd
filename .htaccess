@@ -1,0 +1,64 @@
+RewriteEngine On
+Options +FollowSymlinks
+RewriteBase /lab/test/
+
+# ----------------------------------------------> [COMPATIBILIDAD]
+AddDefaultCharset utf-8
+AddCharset utf-8 .atom .css .js .json .rss .vtt .webapp .xml .php .html
+
+
+
+
+# ----------------------------------------------> [WEBFONTS]
+<FilesMatch "\.(eot|font.css|otf|ttc|ttf|woff)$">
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
+
+
+
+
+# ----------------------------------------------> [SEGURIDAD]
+# ----> Bloquear acesso a dirs sin index
+Options -Indexes
+
+# ----> Bloquear acceso a archivos ocultos y directorios
+# RewriteCond %{SCRIPT_FILENAME} -d
+# RewriteCond %{SCRIPT_FILENAME} -f
+# RewriteRule "(^|/)\." - [F]
+
+# ----> Bloquear acceso a archivos de config/fuente/etc
+<FilesMatch "(^#.*#|\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op])|~)$">
+    Order allow,deny
+    Deny from all
+    Satisfy All
+</FilesMatch>
+
+
+
+
+# ----------------------------------------------> [REDIRECTS]
+DirectoryIndex index.php
+
+# ----> Forzar index.php
+# --> Regla para el sistema controlador
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([-a-zA-Z0-9_]+)/*([0-9]*)$ index.php?controller=$1&id=$2 [QSA,NC,L]
+
+# Regla en caso de que el usuario entre cualquier cosa.
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-l
+
+
+
+
+# ----> Errores
+ErrorDocument 404 /404.html
+
+
+# ----> Quitar el www
+#RewriteCond %{HTTPS} !=on
+#RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+#RewriteRule ^ http://%1%{REQUEST_URI} [R=301,L]
