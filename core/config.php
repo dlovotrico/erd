@@ -1,67 +1,1 @@
-<?php
-/**
- * Arrays y funciones de configuración
- *
- * Este archivo simplemente sirve para la comodidad en la configuración,
- * luego durante ejecución es levantado por el modelo Info(), procesado
- * y formateado para su uso, por lo que si necesitamos pedir cierta info
- * deberemos utilizar Info() y sus métodos. 
- * 
- * 
- * @author       Diego Lovotrico <diego@nucleoid.net>
- *
- * @version      0.1
- * @since        Version 0.1
- * 
- * 
- * @todo         Cambiar permisos a sólo lectura.
- * 
- */
-
-
-// ******* CONFIGURAMOS EL REPORTE DE ERRORES *******
-error_reporting(E_ALL & ~E_NOTICE);
-
-
-
-// ******* PARAMETROS INTERNOS *******
-date_default_timezone_set('America/Argentina/Buenos_Aires');
-
-
-
-// ******* VARIABLES DE EJECUCIÓN *******
-define('CFG_ERROR_LEVEL',   3);
-define('CFG_RUN_MODE',      'deployment');
-// define('CACHING_MODE',      'off');  // - Implementar más adelante.
-
-
-
-// ******* CONFIGURAMOS LA META-INFO *******
-define('INFO_VERSION',   '0.1 alpha');
-define('INFO_AUTHOR',    'Diego Lovótrico');
-define('INFO_COPYRIGHT', 'Creative Commons License');
-
-
-
-// ******* CONFIGURACIÓN VIEWS ACEPTADAS *******
-$controllers['default'] = 'Frontpage';          // Controlador por defecto a cargar.
-$controllers['public']  = 'frontpage|test';     // Respetar el formato, el nombre de
-                                                // cada controlador se escribe en
-                                                // minúsculas.
-
-
-// ******* SELECCION DEL THEME Y EL MOTOR DE VISTAS*******
-define('APP_PATH',          '/lab/test/');      // *** Base path de la aplicación. ***
-define('THEME_PATH',        CONTENT_PATH.'themes/v1/');
-define('APP_VIEW',          'View');            // Permite cambiar el motor de renderizado
-                                                // del sitio. Por ahora implemento uno simple
-                                                // y generalizado, pero en el futuro voy a 
-                                                // crear uno específico para distintas 
-                                                // tecnologías, móviles, desktop, etc.
-
-
-// ******* CONFIGURACIÓN BASE DE DATOS *******
-$database['host'] = 'def';
-$database['user'] = 'daf';
-$database['pass'] = 'dif';
-// $database['lib'] = '';       // - Implementar más adelante. 
+<?php/** * <h1>Configuration arrays and variables</h1> * - This file exists only to make configuration easy and confortable. * - <strong>Many configuration options are set as constants, these are widely  *   accessible through all the programs.</strong> * - During execution, this file is retrieved by <em><strong>models/info.php</strong></em>  *   for processing and then the configuration arrays and variables <strong> *   which arent constants</strong> and made them available throug the Info()  *   class tool. * - A third kind of configuration options presented here are by passing values *   to PHP's own configuration functions. *  *  * <h2>Accessing the configuration</h2> * - Constants: can be called directly. * - Arrays: can be called through:  * - <em>Info()->getConfigVars($cfgvar)</em> : retrieves the general cfg vars.  * - <em>Info()->getDbInfo($credential)</em> : retrieves the DB configuration *                                             data in a one by one basis. *  * ---- *  *  * @author       Diego Lovotrico <diego@nucleoid.net> *  * @version      0.1 * @since        0.1 *  *  * ---- *  *  * @todo         Cambiar permisos a sólo lectura. *  */#*******************************************************[ERROR REPORTING]error_reporting(E_ALL & ~E_NOTICE);#*******************************************************[INTERNAL PARAMS]date_default_timezone_set('America/Argentina/Buenos_Aires');#*******************************************************[EXECUTION VARIBLES]define('APP_PATH',          '/lab/test/');      // *** APP BASE-PATH ***define('CFG_ERROR_LEVEL',   3);define('CFG_RUN_MODE',      'deployment');// define('CACHING_MODE',      'off');          // - To be implemented.#*******************************************************[METADATA AND AUTHORSHIP]define('INFO_VERSION',   '0.1 alpha');define('INFO_AUTHOR',    'Diego Lovótrico');define('INFO_COPYRIGHT', 'Creative Commons License');#*******************************************************[CONTROLLERS]/* * @todo Why is default in upper case?  */$controllers['default'] = 'Frontpage';          // Controlador por defecto a cargar.$controllers['public']  = 'frontpage|test';     // must be written in lower case.#*******************************************************[THEMING AND VIEWS]/** * <h3>Available views</h3> * - View: - The standard renderer for websites: header, content, footer.  *         - For destop/mobile/print versions it changes the CSS. *  * @todo make view engine dynamic, change if it's a mobiled device or such. */define('APP_VIEW',          'View');            // - Selects the renderization //                                              //   engine.                                                // - Needs to be reworked to                                                 //   work automatically.define('THEME_PATH',        CONTENT_PATH.'themes/v1/');#*******************************************************[DATABASE CONFIGURATION]$database['host'] = 'def';$database['user'] = 'daf';$database['pass'] = 'dif';// $database['lib'] = '';       // - Implementar más adelante.

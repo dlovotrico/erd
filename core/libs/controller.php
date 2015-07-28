@@ -1,26 +1,1 @@
-<?php
-
-/**
- * <b>Controlador principal</b>.
- * 
- * Del mismo heredan todos los demás controladores. Básicamente
- * existe para cargar la vista pertinente a cada controlador.
- * 
- * 
- * @author      Diego Lovotrico <diego@nucleoid.net>
- * 
- * @version     Version 0.1
- * @since       Version 0.1
- * @category    Librerías, controladores
- * 
- */
-
-class Controller {
-    public $_View;     // Almacena el objeto armador de vistas.
-   
-    function __construct() {
-        // CARGA LA VISTA
-        $viewName = Info::getConfigVars('view engine');
-        $this->_View = new $viewName();
-    }
-}
+<?php/** * <h1>View loader</h1> * - This controller is basically a front loader for the view engine.  * - It basically loades the view specific to the controller requested *   by the user. *  *  * ---- *  *  * @author      Diego Lovotrico <diego@nucleoid.net> *  * @category    Controllers * @Category    System *  * @version     0.1 * @since       0.1 */class Controller {    public $_View;             // - stores the view builder object.    function __construct() {        // --------> [VIEW LOADING]        $viewName = Info::getConfigVars('view engine');        $this->_View = new $viewName();    }}

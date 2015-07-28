@@ -1,63 +1,1 @@
-<?php
-
-/**
- * <b>Modelo controlador de errores</b>
- *
- * Recibe errores de todos los módulos de la aplicación, los
- * colecciona y reporta en caso de ser requeridos informando
- * además el nivel de seguridad. 
- * 
- * 
- * <b>Códigos</b>
- *      - <b>Serie 1000</b> - <i>Recursos no disponibles</i>
- *              - 1001: El controlador solicitado por el usuario no existe.
- *                      Este error no justifica terminar el programa, se
- *                      procede redireccionando al usuario a la frontpage.
- *              - 1002: Theme incompleto, falta algún archivo del mismo. 
- *                      <b>error severo</b> se finaliza el programa y despliega
- *                      mensaje. 
- * 
- * @author       Diego Lovotrico <diego@nucleoid.net>
- *
- * @since        Version 0.1
- * @version      0.1
- * 
- */
-
-class Error {
-    private static $_singleton;
-    private static $_reportedErrors = array();
-
-    private function __construct() {
-        // INICIALIZANDO EL ARRAY DE ERRORES REPORTADOS
-        self::$_reportedErrors[1001] = array();
-        self::$_reportedErrors[1002] = array();
-    }
-    
-    public static function getInstance() {
-        if(is_null (self::$_singleton)) {
-            self::$_singleton = new Error();
-        }
-        RETURN self::$_singleton;
-    } // Fin getInstance()
-
-    
-    
-    // ----> METODOS PUBLICOS
-    /**
-     * <b>Reporta un error al sistema</m>
-     * 
-     * 
-     * @since        Version 0.1
-     * 
-     * 
-     * @param int $errorCode tipo de error reportado. 
-     */
-    public static function addError($series,$info = TRUE) {
-         array_push(self::$_reportedErrors[$series], $info);
-    }
-    
-    public static function getError() {
-        return self::$_reportedErrors;
-    }
-}
+<?php/** * <h1>Modelo controlador de errores</h1> * - Receives errors from all the modules, controllers, etc and *   collect them and report the error if needed.  * - The behavior may changed depending the configured security  *   level. *  *  * <h2>Codes</h2> *      - <strong>Series 1000</strong> - <em>Not available/allowed resources</em> *              - <em>1001</em>: The requested controller doesn't exist.  *                               This error doesn't require terminating the app *                               and just proceeds to take the user to the *                               frontpage. *              - <em>1002</em>: Incomplete theme, a file is missing. *                               <strong>severe error</b> the program is terminated *                               and a message is displayed. * *  * ---- *  *   * @author       Diego Lovotrico <diego@nucleoid.net> * * @since        0.1 * @version      0.1 *  *  * @todo Instead of the modules reporting the error messages the error messages *       should be stored in a message file, and then that file requested by *       thus model if there's an error. This would also help with translation *       and localization of the system. */class Error {    private static $_singleton;    private static $_reportedErrors = array();    private function __construct() {        // - Reported errors array initialization.        // - These errors are stored.         self::$_reportedErrors[1001] = array();        self::$_reportedErrors[1002] = array();    } // __construct()    // --------> [SINGLETON]    public static function getInstance() {        if(is_null (self::$_singleton)) {            self::$_singleton = new Error();        }        return self::$_singleton;    } // getInstance()    // ----------------------------------------------------------------------    // ----------------------------------------------------> [PUBLIC METHODS]    // ----------------------------------------------------------------------    /**     * <h3>Reports an error to the system itself</h3>     *      * @since        Version 0.1     *      * @param int $errorCode tipo de error reportado.      */    public static function addError($series,$info = TRUE) {         array_push(self::$_reportedErrors[$series], $info);    }    public static function getError() {        return self::$_reportedErrors;    }}
