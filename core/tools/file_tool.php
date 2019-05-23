@@ -3,7 +3,7 @@
 /**
  * <h1>General purpose file operations tools</h1>
  * - This class is intended to serve as a tool to deal with files. Some of its 
- *   goals consist in:
+ *   goals are:
  *   - Checking the existence of a certain file.
  *   - Checking the size of a file.
  *   - Checking the hash of a file.
@@ -33,6 +33,9 @@ class File_tool {
         RETURN self::$_singleton;
     } // getInstance()
     
+    
+
+
     
     // -----------------------------------------------------------------------
     // |----------------------------------------------------> [PUBLIC METHODS]
