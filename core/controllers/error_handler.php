@@ -24,8 +24,9 @@
  *  
  * @author       Diego Lovotrico <diego@nucleoid.net>
  *
- * @since        0.1
  * @version      0.1
+ * @since        0.1
+
  */
 
 
@@ -33,14 +34,12 @@
 class Error_handler {
     private static $_singleton;
     
-    private $_reportedErrors = array();
+    private static $_reportedErrors = array();  
 
     
     
     
     private function __construct() {
-echo "<p>Error is included 2";
-
         // - Reported errors array initialization.
         // - These errors are stored. 
         self::$_reportedErrors[1001] = array();
@@ -54,7 +53,7 @@ echo "<p>Error is included 2";
     // --------> [SINGLETON]
     public static function getInstance() {
         if(is_null (self::$_singleton)) {
-            self::$_singleton = new Error();
+            self::$_singleton = new Error_handler();
         }
         RETURN self::$_singleton;
     } // getInstance()
@@ -63,21 +62,34 @@ echo "<p>Error is included 2";
 
     
     
+##
+##--------------------------------------------------------------------[PUBLIC METHODS]
+##
+    
 
-    // ----------------------------------------------------------------------
-    // ----------------------------------------------------> [PUBLIC METHODS]
-    // ----------------------------------------------------------------------
     /**
      * <h3>Reports an error to the system itself</h3>
+     *
+     * @author       Diego Lovotrico <diego@nucleoid.net>
      * 
-     * @since        Version 0.1
+     * @access      public
+     * @version     0.1
+     * @since       0.1
+     *
      * 
      * @param int $errorCode type of the reported error. 
      */
     public static function addError($series,$info = TRUE) {
-         array_push(self::$_reportedErrors[$series], $info);
+        array_push(self::$_reportedErrors[$series], $info);
     }
 
+
+    /**
+     * <h3>Returns the reported errors array in its entirety</h3>
+     * 
+     * @since        Version 0.1
+     *
+     */
 
     public static function getError() {
         return self::$_reportedErrors;

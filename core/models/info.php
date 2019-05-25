@@ -33,35 +33,35 @@
 */
 
 
-class Info {
-    private static $_singleton;
-    
+class Info 
+{
+   
     private $_database      = null;       // - filled with config vars.
-    private $_config        = null;
     private $_controllers   = array();    // - filled with config vars.
-
+    private $Sanitizer      = null;       // - Container for the Sanitizer() class.
 
     
 
-    private function __construct() { 
-        // --------> [LOADING THE CONFIGURATION]
+    public function __construct() 
+    { 
+        ##--------------------------[LOADING THE CONFIGURATION]
         // see $this->getConfigVars() for more
         require_once CORE_PATH.'config.php';
+
         $this->_database                = $database;
+
+
+        
+/*
+ * @todo Remove these and implemente the Router() 
+*/
         $this->_controllers['default']  = $controllers['default'];
         $this->_controllers['public']   = explode("|", $controllers['public']);
+        
+        
+        ##--------------------------[TOOLS]
+        $this->Sanitizer = new Sanitizer();        
     } //  __construct()
-
-
-
-    // --------> [SINGLETON]
-    public static function getInstance() {
-        if(is_null (self::$_singleton)) {
-            self::$_singleton = new Info();
-        }
-        RETURN self::$_singleton;
-    } // getInstance()
-
 
     
 
@@ -79,10 +79,11 @@ class Info {
      *  
      * @access      private
      * @param       string $userVar
-     * @return      string              The GET var sanitized.
+     * @return      string The GET var sanitized.
     */
-    private function getUserVar($userVar) {
-        return $this->_Sanitizer->fromUrl($_GET[$userVar]);
+    private function getUserVar($userVar) 
+    {
+        return $this->Sanitizer->fromUrl($_GET[$userVar]);
     }
 
 
@@ -108,30 +109,30 @@ class Info {
      * @return      boolean     Returns false if the controller requested by the 
      *                          user doesn't exist or if it isn't public.
     */
-    public function getController() {
-echo "GET CONTROLLER";
+    public function getController() 
+    {
         // --> Check the controller requested by the user.
         $controller = strtolower($this->getUserVar('controller'));
         // --> GET var empty? Default controller is loaded then.
         (strlen($controller) == 0 ?  $controller = $this->_controllers['default'] : FALSE);
         // --> Checks if the class of the model exists as a file.
-        if(file_exists(CONTROLLERS_PATH.$controller.'.php')) {
+        if(file_exists(CONTROLLERS_PATH.$controller.'.php')) 
+        {
             // - Checks if the controller is publicly accessed (config.php)
-            if(in_array($controller,$this->_controllers['public'])) {
+            if(in_array($controller,$this->_controllers['public'])) 
+            {
                 // First character to upprcase.
                 return ucfirst($controller);
-            } else {
-/**
- * @todo Integrate the session
- */
-                Error::addError(1001,"Error, access to '$controller' is not allowed.");
+            } else 
+            {
+                Error_handler::addError(1001,"Error, access to '$controller' is not allowed.");
             }
-        } else {
-            Error::addError(1001,"Error, the requested resource ('$controller') doesn't exist.");
+        } else 
+        {
+            Error_handler::addError(1001,"Error, the requested resource ('$controller') doesn't exist.");
             // First character to upprcase.
             return ucfirst($this->_controllers['default']);
         }
-
     } // getController()
 
 
@@ -150,7 +151,8 @@ echo "GET CONTROLLER";
      * @access      public
      * @return      integer     The ID of the selected resource.
     */
-    public function getId() {
+    public function getId() 
+    {
        return (int)$this->getUserVar('id');
     } // getId()
 
@@ -199,8 +201,10 @@ echo "GET CONTROLLER";
      * @return      string              Value of the requested variable.
      * @return      false               If the requested variable doesn't exist.
     */
-    public static function getConfigVars($cfgvar) {
-        switch ($cfgvar) {
+    public function getConfigVars($cfgvar) 
+    {
+        switch ($cfgvar) 
+        {
 /*
  * @todo this is a configuration constant, why is it being retrieved by a 
  *       Info() function, is it neccessary? 

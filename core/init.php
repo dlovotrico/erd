@@ -45,15 +45,15 @@
  * @category    System
  */
 
+ 
 class Init {
-    private $_Info;         // - holds an instance of core/models/info.php
     private $_contName;     // - 
     private $_id;           // - specific id within the controller.
     private $_Session;      // - session data. // TO IMPLEMENT
-    private $_Error;        // - error manager.
 
-    private $_Sanitizer         = null; 
-    private $_Error_manager     = null;       // - stores the error handler.    
+    // 
+    private $Info;                      // - Stores the Info() class.
+    private $Error_handler     = null;  // - Stores the Error_handler() class.    
     
 
 
@@ -61,25 +61,24 @@ class Init {
         require_once TOOLS_PATH.'autoloader.php';
 
         // --------> [LOADING THE SYSTEM TOOLS]
-        $this->_Sanitizer = new Sanitizer();        
-        $this->_Error = Error_handler::getInstance();
-        $this->_Info  = Info::getInstance();  
+        // --> Singleton classes.
+        $this->Error_handler    = Error_handler::getInstance();
+
+        // --> Instance specific classes.
+        $this->Info             = new Info();     
 
 
 
 
-
+// MOVE ALL OF THIS OUTSIDE OF THE CONTRUCT()
 
         // --------> [USER REQUEST PROCESSING]
         // ----> CONTROLLER IDENTIFICATION
-        $this->_contName    = $this->_Info->getController();
-        $this->_id          = $this->_Info->getId();
-
-        
+        $this->_contName    = $this->Info->getController();
+        $this->_id          = $this->Info->getId();
 
         // ----> CONTROLLER LOADING
-//        $this->_Controller  = new $this->_contName();
-
+        // $this->_Controller  = new $this->_contName();
 
 
 
