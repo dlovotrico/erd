@@ -1,3 +1,1 @@
-Initial readme file. 
-
-More later. 
+This is just a small personal test project to learn PHP.
