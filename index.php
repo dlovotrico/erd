@@ -42,9 +42,10 @@ define('LIBS_PATH',         CORE_PATH.'libs/');
 define('TOOLS_PATH',        CORE_PATH.'tools/');
 
 
-// --------> [ROOT EXECUTION]
-define('FROM_INDEX',     1);
 
+// --------> [ROOT EXECUTION]
+// @todo Implement inside the other files.
+define('FROM_INDEX', 1);
 
 
 

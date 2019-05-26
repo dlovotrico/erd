@@ -1,4 +1,7 @@
 <?php
+if(!defined('FROM_INDEX') ) { die("Execute from site root."); }
+
+
 
 /**
  * <b>View for controller deployment</b>

@@ -1,23 +1,23 @@
 <?php
+if(!defined('FROM_INDEX') ) { die("Execute from site root."); }
+
+
 
 /**
  * <h1>Info system tool</h1>
- * - <strong>Program info:</strong> <em>URLs, paths, time, environment, config,
- *                                  user inputted data, etc.</em>
+ * - <strong>Program info:</strong> <em>URLs, paths, time, environment, config, user inputted data, etc.</em>
  * 
- * - Basically this class is in charge of collecting info using different
- *   methods and give it to the controllers in a default, easy way.
+ * - Basically this class is in charge of collecting info using different methods and give it to the controllers 
+ *   in a default, easy way.
  * 
  * 
  * <h2>User information</h2>
- * - All info inputted by the user is sanitized before returning it by the 
- *   <code>Sanitizer()</code> tool.
+ * - All info inputted by the user is sanitized before returning it by the <code>Sanitizer()</code> tool.
  *
  * 
  * <h2>Class usage notes</h2>
  * - Only one instance allowed <em>(Singleton pattern)</em>.
- * - All configuration data can be requested to Info() from other classes by
- *   invoking <code>Info::getConfigVars()</code>
+ * - Configuration data requested from Info() from other classes by invoking <code>Info::getConfigVars()</code>
  * 
  * 
  * ----
@@ -35,7 +35,6 @@
 
 class Info 
 {
-   
     private $_database      = null;       // - filled with config vars.
     private $_controllers   = array();    // - filled with config vars.
     private $Sanitizer      = null;       // - Container for the Sanitizer() class.
@@ -60,7 +59,7 @@ class Info
         
         
         ##--------------------------[TOOLS]
-        $this->Sanitizer = new Sanitizer();        
+        $this->Sanitizer = new Sanitizer();
     } //  __construct()
 
     

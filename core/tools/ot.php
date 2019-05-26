@@ -1,5 +1,7 @@
-<<<<<<< HEAD
 <?php
+if(!defined('FROM_INDEX') ) { die("Execute from site root."); }
+
+
 
 /**
  * Description of outputtools

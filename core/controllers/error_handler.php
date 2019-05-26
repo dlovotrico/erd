@@ -1,4 +1,7 @@
 <?php
+if(!defined('FROM_INDEX') ) { die("Execute from site root."); }
+
+
 
 /**
  * <h1>Error checking and handling Model</h1>
