@@ -1,18 +1,20 @@
 <?php
 if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 
-
-
 /**
- * <h1>User configuration arrays and variables</h1>
- * - During execution, this file is retrieved by <em><strong>models/info.php</strong></em> 
- *   for processing and then its contents are made available through the Info() class tool.
- *
- *  - A third kind of configuration options presented here are by passing values
- *   to PHP's own configuration functions.
+ * <h1>Settings file</h1>
+ * User configuration arrays and variables
  * 
  * 
- * ----
+ * 
+ * <h2>[WORKING NOTES]</h2>
+ * <ul>
+ *   <li>During execution, this file is retrieved by <em><code>models/info.php</code></em></li>
+ *   <li>for processing and then its contents are made available through the <code>Info()</code> class.</li>
+ *   <li>A third kind of configuration options presented here are by passing values to PHP's own configuration functions.</li>
+ * </ul> 
+ * 
+ * 
  * 
  * 
  * @author       Diego Lovotrico <diego@nucleoid.net>

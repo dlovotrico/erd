@@ -7,15 +7,6 @@
  * bootstrapper core.
  *
  *   
- * <h2>ADDITIONAL INFORMATION<h2>
- *   * core/config.php  - contains all the configuration data.
- *                      - config params are loaded into the system 
- *                        by: core/controllers/Info()
- * 
- *   * Init             - init is the bootstrap, it initializes the
- *                        program and all its subsystems. 
- *
- *  
  * ----
  * 
  * 

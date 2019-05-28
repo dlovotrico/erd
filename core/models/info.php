@@ -2,23 +2,29 @@
 if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 
 
-
 /**
  * <h1>Info system tool</h1>
- * - <strong>Program info:</strong> <em>URLs, paths, time, environment, config, user inputted data, etc.</em>
+ * <strong>Program info:</strong> <em>URLs, paths, time, environment, config, user inputted data, etc.</em>
+ * Basically this class is in charge of collecting info using different methods and give it to the controllers 
+ * in a default, easy way.
  * 
- * - Basically this class is in charge of collecting info using different methods and give it to the controllers 
- *   in a default, easy way.
  * 
  * 
- * <h2>User information</h2>
- * - All info inputted by the user is sanitized before returning it by the <code>Sanitizer()</code> tool.
- *
+* <h2>[USAGE NOTES]</h2>
+ * <ul>
+ *   <li>Only one instance allowed <em>(Singleton pattern)</em>.</li>
+ *   <li>Configuration data requested from Info() from other classes by invoking <code>Info::getConfigVars()</code></li>
+ * </ul>
  * 
- * <h2>Class usage notes</h2>
- * - Only one instance allowed <em>(Singleton pattern)</em>.
- * - Configuration data requested from Info() from other classes by invoking <code>Info::getConfigVars()</code> 
  * 
+ * 
+ * <h2>[WORKING NOTES]</h2>
+ * <ul>
+ *   <li>All info inputted by the user is sanitized before returning it by the <code>Sanitizer()</code> tool.</li>
+ * </ul>
+ * 
+ * 
+
  * 
  * ----
  * 
@@ -37,7 +43,7 @@ class Info
 {
     private $_database      = null;       // - filled with config vars.
     private $_controllers   = array();    // - filled with config vars.
-    private $Sanitizer      = null;       // - Container for the Sanitizer() class.
+    private $_Sanitizer      = null;       // - Container for the Sanitizer() class.
 
     
 
@@ -47,13 +53,11 @@ class Info
         // see $this->getConfigVars() for more
         require_once CORE_PATH.'settings.php';
         require_once CORE_PATH.'pconfig.php';
-
-        
         $this->_database                = $database;
 
         
         ##--------------------------[TOOLS]
-        $this->Sanitizer = new Sanitizer();
+        $this->_Sanitizer = new Sanitizer();
 
 
         #--------------> Extracting controllers from the config
@@ -84,36 +88,39 @@ class Info
     {
         if($userVar)   
         {
-            return $this->Sanitizer->fromUrl($_GET[$userVar]);
+            return $this->_Sanitizer->fromUrl($_GET[$userVar]);
         }
     } 
 
 
 
 
-
-
-
-    
-    
     
     
 ##
 ##--------------------------------------------------------------------[PUBLIC METHODS]
 ##
-
     /**
      * <h1>Controller manager</h1>
-     * - Identifies the controller requested by the user, sanitizes it formats it, checks the file of said controller exists, checks
-     *   and if the access level of the user <em>(anonymous users can only access public controllers)</em> and if something is not  
-     *   valid or it doesn't exist it will default to to the default controller set in the config file.
+     * Identifies the controller requested by the user, sanitizes it formats it, checks the file of said controller exists, checks
+     * and if the access level of the user <em>(anonymous users can only access public controllers)</em> and if something is not  
+     * valid or it doesn't exist it will default to to the default controller set in the config file.
+     * 
+     * 
+     * 
+     * 
+     * <h2>[WORKING NOTES]</h2>
+     * <ul>
+     *   <li>Returns false if the controller requested by the user doesn't exist or if it isn't public.</li>
+     * </ul>
+     * 
      * 
      * @version     0.1
      * @since       0.1
      * 
      * @access      public
-     * @return      boolean     Returns false if the controller requested by the 
-     *                          user doesn't exist or if it isn't public.
+     * @return      boolean     
+     *                          
     */
     public function getController() 
     {
