@@ -1,5 +1,5 @@
 <?php
-if(!defined('FROM_INDEX') ) { die("Execute from site root."); }
+if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 
 
 

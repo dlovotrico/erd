@@ -1,5 +1,5 @@
 <?php
-if(!defined('FROM_INDEX') ) { die("Execute from site root."); }
+if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 
 
 
@@ -85,7 +85,12 @@ class Init {
 
 
 
+
 // ------------------------------> [TEMPORAL DEBUGGING BOX]
+echo $_SERVER['REQUEST_URI']."\n";
+
+print_r($_GET); 
+
 echo '<div class="dbox">';
 Ot::str(' Controller: <small><b>'.$this->_contName.'</b></small> ');
 Ot::str(' -- Item ID: <small>'.$this->_id.'</small> ');
@@ -110,7 +115,7 @@ echo '</div>';
 
 
 
-
+ 
     } //  __construct()
 }
 

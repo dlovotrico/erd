@@ -1,5 +1,5 @@
 <?php
-if(!defined('FROM_INDEX') ) { die("Execute from site root."); }
+if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 
 
 
@@ -17,7 +17,7 @@ if(!defined('FROM_INDEX') ) { die("Execute from site root."); }
  * 
  * <h2>Class usage notes</h2>
  * - Only one instance allowed <em>(Singleton pattern)</em>.
- * - Configuration data requested from Info() from other classes by invoking <code>Info::getConfigVars()</code>
+ * - Configuration data requested from Info() from other classes by invoking <code>Info::getConfigVars()</code> 
  * 
  * 
  * ----
@@ -45,21 +45,21 @@ class Info
     { 
         ##--------------------------[LOADING THE CONFIGURATION]
         // see $this->getConfigVars() for more
-        require_once CORE_PATH.'config.php';
+        require_once CORE_PATH.'settings.php';
+        require_once CORE_PATH.'pconfig.php';
 
+        
         $this->_database                = $database;
 
-
-        
-/*
- * @todo Remove these and implemente the Router() 
-*/
-        $this->_controllers['default']  = $controllers['default'];
-        $this->_controllers['public']   = explode("|", $controllers['public']);
-        
         
         ##--------------------------[TOOLS]
         $this->Sanitizer = new Sanitizer();
+
+
+        #--------------> Extracting controllers from the config
+        $this->_controllers['default']  = $controllers['default'];
+        $this->_controllers['public']   = explode("|", $controllers['public']);
+
     } //  __construct()
 
     
@@ -82,8 +82,15 @@ class Info
     */
     private function getUserVar($userVar) 
     {
-        return $this->Sanitizer->fromUrl($_GET[$userVar]);
-    }
+        if($userVar)   
+        {
+            return $this->Sanitizer->fromUrl($_GET[$userVar]);
+        }
+    } 
+
+
+
+
 
 
 
@@ -215,4 +222,4 @@ class Info
                 return false;
         }
     } // getConfigVars()
-}
+} // Info()

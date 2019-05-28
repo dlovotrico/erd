@@ -1,5 +1,5 @@
 <?php
-if(!isset($from_index) ) { die("Execute from site root."); }
+if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 
 
 class mysqli_db_driver implements database_interface
