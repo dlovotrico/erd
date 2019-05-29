@@ -51,23 +51,23 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 
  
 class Init {
-    private $_contName;                 // - 
-    private $_id;                       // - specific id within the controller.
-    private $_Session;                  // - session data. // TO IMPLEMENT
-    private $Info;                      // - Stores the Info() class.
-    private $Error_handler     = null;  // - Stores the Error_handler() class.    
-    
+    #------> Data
+    #------> Objects 
+    private $_Session;                      // - session data. // TO IMPLEMENT
+    private $_Error_handler     = null;     // - Stores the Error_handler() class.    
+    private $_Program_info      = null;     // - Stores the Program_info() class.
+    private $_User_info         = null;     // - Stores the Program_info() class.
 
 
     public function __construct() {    
         require_once TOOLS_PATH.'autoloader.php';
         // --------> [LOADING THE SYSTEM TOOLS]
         // --> Singleton classes.
-        $this->Error_handler    = Error_handler::getInstance();
+        $this->_Error_handler    = Error_handler::getInstance();
 
         // --> Instance specific classes.
-        $this->Info             = new Info();     
-
+        $this->_Program_info    = new Program_info();     
+        $this->_User_info       = new User_info();     
 
 
 
@@ -75,8 +75,8 @@ class Init {
 
         // --------> [USER REQUEST PROCESSING]
         // ----> CONTROLLER IDENTIFICATION
-        $this->_contName    = $this->Info->getController();
-        $this->_id          = $this->Info->getId();
+        //$this->_contName    = $this->_Program_info->getController();
+        // $this->_id          = $this->_Program_info->getId();
 
         // ----> CONTROLLER LOADING
         // $this->_Controller  = new $this->_contName();
@@ -86,7 +86,7 @@ class Init {
 
 
 // ------------------------------> [TEMPORAL DEBUGGING BOX]
-echo $_SERVER['REQUEST_URI']."\n";
+echo $_SERVER['REQUEST_URI']."<br />\n";
 
 print_r($_GET); 
 
