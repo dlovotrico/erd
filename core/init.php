@@ -66,8 +66,8 @@ class Init {
         $this->_Error_handler    = Error_handler::getInstance();
 
         // --> Instance specific classes.
-        $this->_Program_info    = new Program_info();     
-        $this->_User_info       = new User_info();     
+        $this->_Program_info     = new Program_info();     
+        $this->_User_info        = new User_info();     
 
 
 
@@ -86,6 +86,17 @@ class Init {
 
 
 // ------------------------------> [TEMPORAL DEBUGGING BOX]
+
+
+if($this->_User_info->getId() != null) { 
+    echo "NOT NULL ".$this->_User_info->getId(); 
+} else {
+    echo "NULL";
+}
+
+
+echo "<br /><br />";
+
 echo $_SERVER['REQUEST_URI']."<br />\n";
 
 print_r($_GET); 

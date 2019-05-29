@@ -37,16 +37,18 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 class User_info 
 {
     #------> Data
-    private $_requested;
-    private $_id;
+    private $_userRequest   = array();
     #------> Objects 
-    private $_Sanitizer      = null;      // - Container for the Sanitizer() class.
+    private $_Sanitizer     = null;      // - Container for the Sanitizer() class.
     
 
     public function __construct()
     {
         ##--------------------------[TOOLS]
         $this->_Sanitizer = new Sanitizer();
+
+        #--------------> Populating data
+        $this->processUserRequest();
     }
 
 
@@ -56,22 +58,41 @@ class User_info
 ##--------------------------------------------------------------------[PRIVATE METHODS]
 ##
     /**
-     * <h1>PROCESS THE USER REQUEST</h1>
-     * <p>Sanitizes the GET vars sent by the user.</p>
-     *
-     * 
-     * 
-     * @version     0.1
-     * @since       0.1
-     *  
-     * @access      private
-     * @param       string $userVar
-     * @return      string The GET var sanitized.
+    * <h1>PROCESS THE USER REQUEST</h1>
+    * <p>Sanitizes the URL  sent by the user and then process the URL finding valid patterns within it for the ID, the
+    * controller and any suitable action. If found, it will populate the array <code>$_userRequest</code> with all the 
+    * data.</p>
+    *
+    * 
+    * 
+    *
+    * <h2>[WORKING NOTES]</h2>
+    * <ul>
+    *   <li>It doesn't return anything, but it populates the class <code>$_userRequest</code> array with the processed 
+    *   URL sent by the user.</li>
+    * </ul>
+    *
+    *
+    * @version     0.1
+    * @since       0.1
+    *  
+    * @access      private
     */
     private function processUserRequest() 
     {
+        $processedURL       = $this->_Sanitizer->fromUrl($_SERVER['REQUEST_URI']);
+        $tempMatch          = array();
 
-        return $this->_Sanitizer->fromUrl($_GET[$userVar]);
+        #------> ID REGEX
+        preg_match('/re[1-9]+/', $processedURL, $tempMatch);
+
+        if($tempMatch[0] != null)
+        {
+            $this->_userRequest['id'] = $tempMatch[0];
+        } else
+        {
+            $this->_userRequest['id'] = null;
+        }
     } 
 
 
@@ -86,11 +107,13 @@ class User_info
 ##--------------------------------------------------------------------[PUBLIC METHODS]
 ##
     /**
-    * <h1>ID INFO</h1>
-    * Returns the item ID requested by the user.
+    * <h1>ID REQUESTED BY THE USER</h1>
+    * <p>Returns the item ID <strong>requested</strong> by the user from the pre-processed during construction class 
+    * array containing the processed URL sent by the user.</p>
     * 
     * 
     * 
+    *
     * <h2>[WORKING NOTES]</h2>
     * <ul>
     *   <li>Returns null if no ID was requested.</li>
@@ -102,10 +125,11 @@ class User_info
     * 
     * @access      public
     * @return      integer     The ID of the selected resource.
+    * @return      integer     If no proper ID was found. 
     */
     public function getId() 
     {
-       return (int)$this->getUserVar('id');
+       return $this->_userRequest['id'];
     } // getId()
 
 } // User_info()
