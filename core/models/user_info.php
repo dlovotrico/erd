@@ -80,18 +80,27 @@ class User_info
     */
     private function processUserRequest() 
     {
-        $processedURL       = $this->_Sanitizer->fromUrl($_SERVER['REQUEST_URI']);
+//        $processedURL       = $this->_Sanitizer->fromUrl($_SERVER['REQUEST_URI']);
         $tempMatch          = array();
 
-        #------> ID REGEX
-        preg_match('/re[1-9]+/', $processedURL, $tempMatch);
+        #------> Extract the ID and the Title from the URL
+        preg_match("@(?P<id>re[0-9]+)/{0,1}(?P<title>([-a-zA-Z0-9])+)@", $_SERVER['REQUEST_URI'], $tempMatch);
 
-        if($tempMatch[0] != null)
-        {
-            $this->_userRequest['id'] = $tempMatch[0];
-        } else
-        {
-            $this->_userRequest['id'] = null;
+        if($tempMatch['id'] != null) {
+            $this->_userRequest['id'] = $this->_Sanitizer->fromUrl($tempMatch['id']);    
+        } else {
+            $this->_userRequest['id'] = null; 
+        }
+        if($tempMatch['title'] != null) {
+            $this->_userRequest['title'] = $this->_Sanitizer->fromUrl($tempMatch['title']);            
+        } else {
+            $this->_userRequest['title'] = null;
+        }
+
+        #------> Sanitize the arguments
+        // Clean the get
+        foreach ($_GET as $key => $val) {
+            $this->_userRequest[$key] = $this->_Sanitizer->fromUrl($val);
         }
     } 
 
@@ -107,9 +116,10 @@ class User_info
 ##--------------------------------------------------------------------[PUBLIC METHODS]
 ##
     /**
-    * <h1>ID REQUESTED BY THE USER</h1>
-    * <p>Returns the item ID <strong>requested</strong> by the user from the pre-processed during construction class 
-    * array containing the processed URL sent by the user.</p>
+    * <h1>PARAM REQUESTED BY THE USER</h1>
+    * <p>Returns the different params <strong>requested</strong> by the user though the URL. The source for these params
+    * comes from the from the <code>$_userRequest</code> array pre-processed by the <code>processUserRequest()</code>
+    * function.</p>
     * 
     * 
     * 
@@ -123,13 +133,20 @@ class User_info
     * @version     0.1
     * 
     * 
-    * @access      public
-    * @return      integer     The ID of the selected resource.
-    * @return      integer     If no proper ID was found. 
+    * @access       public
+    *
+    * @param        string      The string naming the requested URL param.
+    * @return       integer     The ID of the selected resource.
+    * @return       string      If the value is a string.
+    * @return       null        If the requested itm is empty.     
     */
-    public function getId() 
+    public function getUrlParams($request) 
     {
-       return $this->_userRequest['id'];
-    } // getId()
+        if($request != null) {
+            return $this->_userRequest[$request];
+        } else {
+            return null;
+        }
+    } // getUrlParams()
 
 } // User_info()

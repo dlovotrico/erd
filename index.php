@@ -2,8 +2,8 @@
 
 /**
  * <h1>START POINT</h1>
- * This interface calls <em>init()</em> which is the app's loading module, also called the INIT CORE. Besides 
- * defining some path information this file doesn't do much else other than instantiating the Init() 
+ * This interface calls <em>init()</em> which is the app's loading module, also called the <strong>INIT CORE</strong>. Besides 
+ * defining some path information this file doesn't do much else other than instantiating the <em>Init()</em> 
  * bootstrapper core.
  *
  *   

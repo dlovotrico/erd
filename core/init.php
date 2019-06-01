@@ -21,10 +21,11 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  * <h2>[WORKING NOTES]</h2>
  * <ul>
  *   <li><em>core/settings.php</em> Contains all the user configuration data.</li>
- *   <li>Config params are loaded into the system by: <em><code>core/controllers/Info()</code></em></li>
-  *  <li>The controller to be used is selected based on the URL pre-processed by the server.</li>
+ *   <li>Config params are loaded into the system through: <em><code>core/models/program_info.php</code></em> and 
+ *   <em><code>core/models/program_info.php</code></em></li>
+ *   <li>The controller to be used is selected based on the URL pre-processed by the server.</li>
  *     <ul>
- *       <li>For example: <em><code>/id/<item-title>?args=value</code></em></li>
+ *       <li>For example: <em><code>/<id>/<item-title>?args=value</code></em></li>
  *       <li>If the user enters an invalid URL they'll be sent to the default controller.</em></li>
  *     </ul>
  * </ul>
@@ -32,10 +33,11 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  * 
  * 
  * <h2>[CONFIGURATION]</h2>
-* </ul>
- *   <li><strong><code>core/settings.php<code></strong>          - user configuration options and settings.
- *   <li><strong><code>core/pconfig.php<code></strong>           - contains the internal program configuration data.
- *   <li><strong><code>core/controllers/Info()<code></strong>    - feeds configuration params into the system.
+ * </ul>
+ *   <li><strong><code>core/settings.php<code></strong>             - user configuration options and settings.
+ *   <li><strong><code>core/pconfig.php<code></strong>              - contains the internal program configuration data.
+ *   <li><strong><code>core/models/Program_info.php<code></strong>    - feeds program information params into the system.
+ *   <li><strong><code>core/models/User_info.php<code></strong>       - feeds user information params into the system.
  * </ul>
  * 
  * 
@@ -88,23 +90,17 @@ class Init {
 // ------------------------------> [TEMPORAL DEBUGGING BOX]
 
 
-if($this->_User_info->getId() != null) { 
-    echo "NOT NULL ".$this->_User_info->getId(); 
-} else {
-    echo "NULL";
-}
+
+echo $this->_User_info->getUrlParams('subitem');
 
 
 echo "<br /><br />";
-
-echo $_SERVER['REQUEST_URI']."<br />\n";
-
 print_r($_GET); 
 
 
-echo '<div class="dbox">';
-Ot::str(' Controller: <small><b>'.$this->_contName.'</b></small> ');
-Ot::str(' -- Item ID: <small>'.$this->_id.'</small> ');
+// echo '<div class="dbox">';
+// Ot::str(' Controller: <small><b>'.$this->_contName.'</b></small> ');
+// Ot::str(' -- Item ID: <small>'.$this->_id.'</small> ');
 echo '</div>';
 // ---------------------------------------------------------------------------->        
 
