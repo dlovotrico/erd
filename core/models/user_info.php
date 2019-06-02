@@ -40,7 +40,7 @@ class User_info
     private $_userRequest   = array();
     #------> Objects 
     private $_Sanitizer     = null;      // - Container for the Sanitizer() class.
-    
+
 
     public function __construct()
     {
@@ -80,8 +80,8 @@ class User_info
     */
     private function processUserRequest() 
     {
-//        $processedURL       = $this->_Sanitizer->fromUrl($_SERVER['REQUEST_URI']);
         $tempMatch          = array();
+
 
         #------> Extract the ID and the Title from the URL
         preg_match("@(?P<id>re[0-9]+)/{0,1}(?P<title>([-a-zA-Z0-9])+)@", $_SERVER['REQUEST_URI'], $tempMatch);
@@ -142,11 +142,57 @@ class User_info
     */
     public function getUrlParams($request) 
     {
-        if($request != null) {
+        if($this->_userRequest[$request] != null) 
+        {
             return $this->_userRequest[$request];
-        } else {
+        } else 
+        {
             return null;
         }
     } // getUrlParams()
+
+
+
+    /**
+    * <h1>LIST THE AVAILABLE THE URL PARAMETERS</h1>
+    * <p>Returns a numeric array listing all the params available in the URL from the user request.</p>
+    * 
+    *
+    * <h2>[WORKING NOTES]</h2>
+    * <ul>
+    *   <li>Returns null if no ID was requested.</li>
+    * </ul>
+    * 
+    * @since       0.1
+    * @version     0.1
+    * 
+    * 
+    * @access       public
+    *
+    * @return       array       An array with all the params found in the URL.
+    * @return       null        If the URL was empty.     
+    */
+    public function getAvailableUrlParams() 
+    {
+        $urlParams  =   array();
+        $i          =   0;
+
+// if the array is empty
+
+        foreach ($this->_userRequest as $key => $val) 
+        {
+            if($this->_userRequest[$key] != null) {
+                $urlParams[$i] = $key;
+                $i++;
+            }
+        }
+
+        return $urlParams;
+
+    } // getAvailableUrlParams()
+
+
+
+
 
 } // User_info()

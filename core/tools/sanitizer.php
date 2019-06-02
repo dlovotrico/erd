@@ -31,12 +31,9 @@ class Sanitizer
 ## 
     
    /**
-    * <h1>String sanitization</h1>
-    * - This method is the engine of the class.
+    * <h1>STRING SANITIZER TOOL</h1>
+    * <p>This method is the engine of the class.</p>
     * 
-    * 
-    *
-    * ----
     * 
     * 
     * 
@@ -70,7 +67,7 @@ class Sanitizer
         }
 
         return $str;
-   } // sanitizeString
+   } // sanitizeString()
 
 
 

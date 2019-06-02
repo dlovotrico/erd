@@ -91,7 +91,11 @@ class Init {
 
 
 
-echo $this->_User_info->getUrlParams('subitem');
+echo $this->_User_info->getUrlParams('id');
+
+
+echo "<br /><br />";
+print_r($this->_User_info->getAvailableUrlParams()); 
 
 
 echo "<br /><br />";
