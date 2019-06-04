@@ -48,7 +48,7 @@ class User_info
         $this->_Sanitizer = new Sanitizer();
 
         #--------------> Populating data
-        $this->processUserRequest();
+        $this->process_user_request();
     }
 
 
@@ -78,7 +78,7 @@ class User_info
     *  
     * @access      private
     */
-    private function processUserRequest() 
+    private function process_user_request() 
     {
         $tempMatch          = array();
 
@@ -102,7 +102,7 @@ class User_info
         foreach ($_GET as $key => $val) {
             $this->_userRequest[$key] = $this->_Sanitizer->fromUrl($val);
         }
-    } 
+    } // process_user_request()
 
 
 
@@ -140,7 +140,7 @@ class User_info
     * @return       string      If the value is a string.
     * @return       null        If the requested itm is empty.     
     */
-    public function getUrlParams($request) 
+    public function get_url_params($request) 
     {
         if($this->_userRequest[$request] != null) 
         {
@@ -149,7 +149,7 @@ class User_info
         {
             return null;
         }
-    } // getUrlParams()
+    } // get_url_params()
 
 
 
@@ -172,12 +172,10 @@ class User_info
     * @return       array       An array with all the params found in the URL.
     * @return       null        If the URL was empty.     
     */
-    public function getAvailableUrlParams() 
+    public function get_available_url_params() 
     {
         $urlParams  =   array();
         $i          =   0;
-
-// if the array is empty
 
         foreach ($this->_userRequest as $key => $val) 
         {
@@ -189,7 +187,7 @@ class User_info
 
         return $urlParams;
 
-    } // getAvailableUrlParams()
+    } // get_available_url_params()
 
 
 

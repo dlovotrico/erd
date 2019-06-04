@@ -128,7 +128,7 @@ class Program_info
     * @return      boolean     
     *                          
     */
-    public function getController() 
+    public function get_controller() 
     {
         // --> Check the controller requested by the user.
  
@@ -156,7 +156,7 @@ class Program_info
             // First character to upprcase.
             return ucfirst($this->_controllers['default']);
         }
-    } // getController()
+    } // get_controller()
 
 
 
@@ -184,7 +184,7 @@ class Program_info
     * @return      string                  
     * @return      false                   
     */
-    public function getDbInfo($credential) 
+    public function get_db_info($credential) 
     {
         switch ($credential)
         {
@@ -195,6 +195,6 @@ class Program_info
             default:
                 return false;
         }
-    } // getDbInfo()
+    } // get_db_info()
 
 } // Program_info()

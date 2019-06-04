@@ -77,7 +77,7 @@ class Init {
 
         // --------> [USER REQUEST PROCESSING]
         // ----> CONTROLLER IDENTIFICATION
-        //$this->_contName    = $this->_Program_info->getController();
+        //$this->_contName    = $this->_Program_info->get_controller();
         // $this->_id          = $this->_Program_info->getId();
 
         // ----> CONTROLLER LOADING
@@ -88,14 +88,12 @@ class Init {
 
 
 // ------------------------------> [TEMPORAL DEBUGGING BOX]
-
-
-
-echo $this->_User_info->getUrlParams('id');
-
+echo $this->_User_info->get_url_params('id')."<br />";
+echo $this->_User_info->get_url_params('title')."<br />";
+echo $this->_User_info->get_url_params('subitem')."<br />";
 
 echo "<br /><br />";
-print_r($this->_User_info->getAvailableUrlParams()); 
+print_r($this->_User_info->get_available_url_params()); 
 
 
 echo "<br /><br />";
