@@ -9,12 +9,11 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  * This controller is tasked with gathering the contents to the user.  * 
  * 
  * 
- * @author      Diego Lovotrico <diego@nucleoid.net>
-
+ * @author          D.Lovotrico <dlov@nucleoid.net>
  * 
- * @version     version 0.1
- * @since       version 0.1
- * @category    controllers, contents
+ * @version         version 0.1
+ * @since           version 0.1
+ * @category        controllers, contents
  * 
  */
 

@@ -10,7 +10,7 @@
  * ----
  * 
  * 
- * @author      Diego Lovotrico <diego@nucleoid.net>
+ * @author          D.Lovotrico <dlov@nucleoid.net>
  * 
  * @category    Bootstrap
  * @category    System, Init 

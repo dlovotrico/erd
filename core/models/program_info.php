@@ -25,7 +25,7 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 * 
 * 
 * 
-* @author          Diego Lovotrico <diego@nucleoid.net>
+* @author          D.Lovotrico <dlov@nucleoid.net>
 *
 * @category        Models
 * @category        System
@@ -40,6 +40,7 @@ class Program_info
     #------> Data
     private $_database      = null;       // - filled with config vars.
     private $_controllers   = array();    // - filled with config vars.
+    private $_routes        = array();    // - filled with config vars.
     #------> Objects 
 
 
@@ -47,7 +48,7 @@ class Program_info
 
     public function __construct() 
     { 
-        ##--------------------------[LOADING THE CONFIGURATION]
+        ##--------------------------[LOADING AND PROCESSING THE CONFIGURATION]
         // see $this->getConfigVars() for more
         require_once CORE_PATH.'settings.php';
         require_once CORE_PATH.'pconfig.php';
@@ -57,6 +58,7 @@ class Program_info
         $this->_controllers['public']   = explode("|", $controllers['public']);
 
         #--------------> Populating data
+        $this->validate_routes();        
         $this->_database                = $database;
     } //  __construct()
 
@@ -67,6 +69,57 @@ class Program_info
 ##
 ##--------------------------------------------------------------------[PRIVATE METHODS]
 ##
+    /**
+    * <h3>PROCESS ALL THE VALID ROUTES</h3>
+    * <p>Populates the <code>$_routes</code> array with all the available routes.</p>
+    * 
+    *
+    * <h2>[WORKING NOTES]</h2>
+    * <ul>
+    *   <li>All info inputted by the user is sanitized before returning it by the <code>Sanitizer()</code> tool.</li>
+    * </ul> 
+    * 
+    * @version     0.1
+    * @since       0.1
+    * 
+    * @access  public
+    */
+
+// MOVE TO THE VALIDATOR
+    public function validate_routes() 
+    {
+
+        #--------------> Validate the routes from the config. 
+        # ----> If the controller doesn't exist raise an error.
+
+print_r($this->_controllers);
+
+        foreach ($this->_controllers as $key => $val) 
+        {
+
+
+        // Check if the array key belongs to one of the allowed types: default, public, private
+
+            // If not raise a wrong configuration error 
+            // If yes proceed.
+
+                // Check if the value is a string 
+
+                    // If yes: validate for the file existence
+
+                    // If it's an array
+                        // Loop through the numeric sub array 
+                            // Check if the value is a string 
+                                // If yes: validate for the file existence.
+                                // if no: raise a configuration error 
+        } // End for
+
+
+
+    }    
+
+    
+
 
 
 
@@ -86,7 +139,6 @@ class Program_info
      * 
      * @version     0.1
      * @since       0.1
-     * 
      * 
      * @access  public
      * @param       string $cfgvar      Requested configuration variable.

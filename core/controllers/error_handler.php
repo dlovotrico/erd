@@ -25,7 +25,7 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  * ----
  * 
  *  
- * @author       Diego Lovotrico <diego@nucleoid.net>
+ * @author          D.Lovotrico <dlov@nucleoid.net>
  *
  * @version      0.1
  * @since        0.1

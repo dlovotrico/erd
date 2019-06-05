@@ -10,7 +10,7 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  * formatting, etc. All wrapped in HTML and in-line CSS. 
  * 
  * 
- * @author       Diego Lovotrico <diego@nucleoid.net>
+ * @author          D.Lovotrico <dlov@nucleoid.net>
  *
  * @version      0.1
  * @since        version 0.1

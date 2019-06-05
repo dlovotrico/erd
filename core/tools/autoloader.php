@@ -9,7 +9,7 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  * - If the class with a container doesn't exist, it returns FALSE, otherwise
  *   nothing is returned.
  * 
- * @author          Diego Lovotrico <diego@nucleoid.net>
+ * @author          D.Lovotrico <dlov@nucleoid.net>
  * 
  * @since           0.1
  * @version         0.1

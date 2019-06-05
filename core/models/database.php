@@ -10,16 +10,11 @@ class mysqli_db_driver implements database_interface
     private $results;
 
 
-    // Implementa Singleton
-    // Trae el constructor 
-        // Llama a info
-        // Llama a error
 
     function connect($host, $username, $password, $database, $port = 0)
     {
         if (!$port) {
-            // Si no le especificamos un puerto en la config se 
-            // conecta al puerto por defecto. 
+            // If no por is specified it'll connect to the default port.
             $port = 3306;
         }
         $this->mysqli = new mysqli($host, $username, $password, $database, $port);

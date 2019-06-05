@@ -2,22 +2,24 @@
 if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 
 
-
 /**
- * <h1>User configuration arrays and variables</h1>
- * - During execution, this file is retrieved by <em><strong>models/info.php</strong></em> 
- *   for processing and then its contents are made available through the Info() class tool.
- *
- *  - This file contains <strong>internal configuration options</strong> defininf many aspects
- *    of the program's internal configuration.
+ * <h1>INTERNAL PROGRAM CONFIGURATION</h1>
+ * - Internal configuration options. 
  * 
  * 
  * 
  * 
- * ----
+ * <h2>[WORKING NOTES]</h2>
+ * <ul>
+ *   <li>During execution, this file is retrieved by <em><code>models/Program_info.php</code></em></li>
+ *   <li>for processing and then its contents are made available through the <code>Program_info()</code> class.</li>
+ *   <li>A third kind of configuration options presented here are by passing values to PHP's own configuration functions.</li>
+ * </ul> 
  * 
  * 
- * @author       Diego Lovotrico <diego@nucleoid.net>
+ * 
+ * 
+ * @author       D.Lovotrico <dlov@nucleoid.net>
  * 
  * @version      0.1
  * @since        0.1
@@ -41,5 +43,6 @@ define('INFO_COPYRIGHT', 'Creative Commons License');
 ##
 ##--------------------------------------------------------------------[AVAILABLE CONTRLLERS]
 ##
-$controllers['default'] = 'frontpage';          // Controlador por defecto a cargar.
-$controllers['public']  = 'frontpage|test';     // must be written in lower case.
+$controllers['default'] =   'frontpage';          // Default controller
+$controllers['public']  =   'frontpage|test';     
+$controllers['private'] =   null;
