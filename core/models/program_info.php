@@ -85,7 +85,21 @@ class Program_info
         $this->_controllers['default']  = $routes['default'];
         $this->_controllers['public']   = explode("|", $routes['public']);
 
-    }
+        foreach ($this->_controllers as $key => $val) 
+        {
+            // Check if the array key belongs to one of the allowed types: default, public, private
+            if( array_key_exists("default", $routes)    ||
+                array_key_exists("public",  $routes)    ||
+                array_key_exists("private", $routes)        )
+            {
+                $routes[$key] = $routes[$key];
+
+            } else
+            { 
+                // If there's another value. 
+            }
+        }
+    } //process_routes()
 
 
 
