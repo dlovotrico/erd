@@ -54,8 +54,7 @@ class Program_info
         require_once CORE_PATH.'pconfig.php';
 
         #--------------> Extracting controllers from the config
-        $this->_controllers['default']  = $controllers['default'];
-        $this->_controllers['public']   = explode("|", $controllers['public']);
+        $this->process_routes($routes);        
 
         #--------------> Populating data
         $this->validate_routes();        
@@ -70,14 +69,31 @@ class Program_info
 ##--------------------------------------------------------------------[PRIVATE METHODS]
 ##
     /**
+    * <h3>PROCESS THE CONFIGURED ROUTES</h3>
+    * <p>Process all the routes in the config and stores the data in the <code>$_controllers</code> array. The resulting
+    * data will be properly formated for the validating method and then the route information method.</p>
+    * 
+    *
+    * 
+    * @version     0.1
+    * @since       0.1
+    * 
+    * @access  public
+    */    
+    public function process_routes($routes) 
+    {
+        $this->_controllers['default']  = $routes['default'];
+        $this->_controllers['public']   = explode("|", $routes['public']);
+
+    }
+
+
+
+    /**
     * <h3>PROCESS ALL THE VALID ROUTES</h3>
     * <p>Populates the <code>$_routes</code> array with all the available routes.</p>
     * 
     *
-    * <h2>[WORKING NOTES]</h2>
-    * <ul>
-    *   <li>All info inputted by the user is sanitized before returning it by the <code>Sanitizer()</code> tool.</li>
-    * </ul> 
     * 
     * @version     0.1
     * @since       0.1
@@ -96,33 +112,38 @@ print_r($this->_controllers);
 
         foreach ($this->_controllers as $key => $val) 
         {
+            // Check if the array key belongs to one of the allowed types: default, public, private
+            if( array_key_exists("default", $this->_controllers)    ||
+                array_key_exists("public",  $this->_controllers)    ||
+                array_key_exists("private", $this->_controllers)        )
+            {
+                // If yes proceed.
+
+ // If it's an array
+     // Loop through the numeric sub array 
+         // Check if the value is a string 
+             // If yes: validate for the file existence.
+             // if no: raise a configuration error 
+
+// If its' a value            
+    // Check if the value is a string 
+        // If yes: validate for the file existence
+        // If no:  
+echo "<br /><br />KEY:".$key;  
 
 
-        // Check if the array key belongs to one of the allowed types: default, public, private
+            } else
+            {
+                // If not raise a wrong configuration error 
 
-            // If not raise a wrong configuration error 
-            // If yes proceed.
+echo "<br /><br />type not recognized<br />";
+// if no: raise a configuration error 
 
-                // Check if the value is a string 
-
-                    // If yes: validate for the file existence
-
-                    // If it's an array
-                        // Loop through the numeric sub array 
-                            // Check if the value is a string 
-                                // If yes: validate for the file existence.
-                                // if no: raise a configuration error 
-        } // End for
-
-
-
-    }    
+            }
+        } // for
+    } // validate_routes() 
 
     
-
-
-
-
 
 
     

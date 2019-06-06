@@ -43,6 +43,11 @@ define('INFO_COPYRIGHT', 'Creative Commons License');
 ##
 ##--------------------------------------------------------------------[AVAILABLE CONTRLLERS]
 ##
+
+# - Accepted controller domains: default, public, private. 
+# - Any other domain will raise a configuration error.
 $controllers['default'] =   'frontpage';          // Default controller
 $controllers['public']  =   'frontpage|test';     
-$controllers['private'] =   null;
+$controllers['private'] =    null;
+$controllers['flori']  = 'ddd';
+$controllers['wdwdlori']  = 'ddd'; 

@@ -163,9 +163,10 @@ class User_info
     *   <li>Returns null if no ID was requested.</li>
     * </ul>
     * 
+    *
+    *
     * @since       0.1
     * @version     0.1
-    * 
     * 
     * @access       public
     *
