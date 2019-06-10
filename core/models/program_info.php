@@ -42,7 +42,7 @@ class Program_info
     private $_controllers   = array();    // - filled with config vars.
     private $_routes        = array();    // - filled with config vars.
     #------> Objects 
-
+    // ErrorHandler         - called from the root class.
 
     
 
@@ -59,6 +59,11 @@ class Program_info
         #--------------> Populating data
         $this->validate_routes();        
         $this->_database                = $database;
+
+        echo "Test errorr:";
+        Error_handler::active();
+
+
     } //  __construct()
 
     
@@ -93,14 +98,17 @@ class Program_info
                     case 'default':
                         $this->_controllers['default']  = $routes['default'];
                         break;
-                    case 'default':
+                    case 'public':
                         $this->_controllers['public']   = explode("|", $routes['public']);
                         break;
+                    case 'private':
+                        $this->_controllers['private']   = explode("|", $routes['private']);
+                        break;                        
                     default:
-                        ($alertTriggered == 1 ? true : $alertTriggered = 1);
 
+                    // Add the alert 
                     
-// Raise alert: only default/public/private are allowed
+                        ($alertTriggered == 1 ? Error_handler::addAlert(1001,'test') : $alertTriggered = 1);
                 }
             } else
             {

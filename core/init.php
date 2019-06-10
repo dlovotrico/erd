@@ -55,21 +55,21 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 class Init {
     #------> Data
     #------> Objects 
-    private $_Session;                      // - session data. // TO IMPLEMENT
-    private $_Error_handler     = null;     // - Stores the Error_handler() class.    
-    private $_Program_info      = null;     // - Stores the Program_info() class.
-    private $_User_info         = null;     // - Stores the Program_info() class.
+    private $Session;                      // - session data. // TO IMPLEMENT
+    private $Error_handler     = null;     // - Stores the Error_handler() class.    
+    private $Program_info      = null;     // - Stores the Program_info() class.
+    private $User_info         = null;     // - Stores the Program_info() class.
 
 
     public function __construct() {    
         require_once TOOLS_PATH.'autoloader.php';
         // --------> [LOADING THE SYSTEM TOOLS]
         // --> Singleton classes.
-        $this->_Error_handler    = Error_handler::getInstance();
+        $this->Error_handler    = Error_handler::getInstance();
 
         // --> Instance specific classes.
-        $this->_Program_info     = new Program_info();     
-        $this->_User_info        = new User_info();     
+        $this->Program_info     = new Program_info();     
+        $this->User_info        = new User_info();     
 
 
 
@@ -84,16 +84,13 @@ class Init {
         // $this->_Controller  = new $this->_contName();
 
 
-
-
-
 // ------------------------------> [TEMPORAL DEBUGGING BOX]
-echo $this->_User_info->get_url_params('id')."<br />";
-echo $this->_User_info->get_url_params('title')."<br />";
-echo $this->_User_info->get_url_params('subitem')."<br />";
+echo $this->User_info->get_url_params('id')."<br />";
+echo $this->User_info->get_url_params('title')."<br />";
+echo $this->User_info->get_url_params('subitem')."<br />";
 
 echo "<br /><br />";
-print_r($this->_User_info->get_available_url_params()); 
+print_r($this->User_info->get_available_url_params()); 
 
 
 echo "<br /><br />";

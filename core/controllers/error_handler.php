@@ -4,55 +4,53 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 
 
 /**
- * <h1>Error checking and handling Model</h1>
- * - Receives errors from all modules, controllers, etc and collects them and 
- *   also reports if needed. 
- * - The behavior may changed depending the configured security 
- *   level.
+ * <h1>ERROR MANAGEMENT AND HANDLING</h1>
+ * <p>Receives errors and alerts from all modules, controllers, etc. and collects them and also reports them if needed. 
  * 
  * 
- * <h2>Codes</h2>
- *      - <strong>Series 1000</strong> - <em>Not available/allowed resources</em>
- *              - <em>1001</em>: The requested controller doesn't exist. 
- *                               This error doesn't require terminating the app
- *                               and just proceeds to take the user to the
- *                               frontpage.
- *              - <em>1002</em>: Incomplete theme, a file is missing.
- *                               <strong>severe error</b> the program is terminated
- *                               and a message is displayed.
- *
  * 
- * ----
+ * <h2>[WORKING NOTES]</h2>
+ * <p>The behavior may changed depending the configured security level.</p>
+ * 
+ * 
+ * <h2>[ERROR CODES]</h2>
+ * <p>See documentation</p>
+ * 
+ * 
  * 
  *  
  * @author          D.Lovotrico <dlov@nucleoid.net>
  *
- * @version      0.1
- * @since        0.1
+ * @version         0.1
+ * @since           0.1
 
  */
 
 
 
-class Error_handler {
-    private static $_singleton;
-    
+class Error_handler {    
+    #------> Data    
     private static $_reportedErrors = array();  
+    private static $_reportedAlerts = array();  
+    #------> Objects 
+    private static $_singleton;
 
     
     
-    
     private function __construct() {
-        // - Reported errors array initialization.
-        // - These errors are stored. 
         self::$_reportedErrors[1001] = array();
         self::$_reportedErrors[1002] = array();
+        self::$_reportedAlerts[1001] = array();
+        self::$_reportedAlerts[1002] = array();
     } // __construct()
 
 
 
 
-    
+
+##
+##--------------------------------------------------------------------[PRIVATE METHODS]
+##
     // --------> [SINGLETON]
     public static function getInstance() {
         if(is_null (self::$_singleton)) {
@@ -65,19 +63,22 @@ class Error_handler {
 
 
 
+
 ##
 ##--------------------------------------------------------------------[PUBLIC METHODS]
 ##
 
     /**
-     * <h3>Reports an error to the system itself</h3>
+     * <h3>REGISTER AN ERROR</h3>
+     * 
+     * 
      * 
      * @version     0.1
      * @since       0.1
      * 
      * @access      public
      *
-     * @param int $errorCode type of the reported error. 
+     * @param       int $errorCode type of the reported error. 
      */
     public static function addError($series,$info = TRUE) {
         array_push(self::$_reportedErrors[$series], $info);
@@ -85,9 +86,28 @@ class Error_handler {
 
 
     /**
+     * <h3>REGISTER AN ALERT</h3>
+     * 
+     * 
+     * 
+     * @version     0.1
+     * @since       0.1
+     * 
+     * @access      public
+     *
+     * @param       int $errorCode type of the reported error. 
+     */
+    public static function addAlert($series,$info = TRUE) {
+        array_push(self::$_reportedAlerts[$series], $info);
+    }
+
+
+    /**
      * <h3>Returns the reported errors array in its entirety</h3>
      * 
-     * @since        Version 0.1
+     * 
+     * @version     0.1
+     * @since       0.1
      *
      */
 
