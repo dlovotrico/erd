@@ -63,23 +63,20 @@ class Error_handler {
 
 
 
-    
-    
+
+
 ##
 ##--------------------------------------------------------------------[PUBLIC METHODS]
 ##
-    
 
     /**
      * <h3>Reports an error to the system itself</h3>
-     *
-     * @author       Diego Lovotrico <diego@nucleoid.net>
      * 
-     * @access      public
      * @version     0.1
      * @since       0.1
-     *
      * 
+     * @access      public
+     *
      * @param int $errorCode type of the reported error. 
      */
     public static function addError($series,$info = TRUE) {
@@ -97,6 +94,13 @@ class Error_handler {
     public static function getError() {
         return self::$_reportedErrors;
     }
+
+// TEST DELETE
+public static function active() {
+    echo "active";
+}
+
+
 
 } // Error()
 

@@ -54,7 +54,7 @@ class Program_info
         require_once CORE_PATH.'pconfig.php';
 
         #--------------> Extracting controllers from the config
-        $this->process_routes($routes);        
+        $this->process_routes($controllers);        
 
         #--------------> Populating data
         $this->validate_routes();        
@@ -82,21 +82,29 @@ class Program_info
     */    
     public function process_routes($routes) 
     {
-        $this->_controllers['default']  = $routes['default'];
-        $this->_controllers['public']   = explode("|", $routes['public']);
+        $alertTriggered = 0;
 
-        foreach ($this->_controllers as $key => $val) 
+        foreach ($routes as $key => $val) 
         {
-            // Check if the array key belongs to one of the allowed types: default, public, private
-            if( array_key_exists("default", $routes)    ||
-                array_key_exists("public",  $routes)    ||
-                array_key_exists("private", $routes)        )
+            if(gettype($routes['default']) == 'string')
             {
-                $routes[$key] = $routes[$key];
+                switch ($key) 
+                {
+                    case 'default':
+                        $this->_controllers['default']  = $routes['default'];
+                        break;
+                    case 'default':
+                        $this->_controllers['public']   = explode("|", $routes['public']);
+                        break;
+                    default:
+                        ($alertTriggered == 1 ? true : $alertTriggered = 1);
 
+                    
+// Raise alert: only default/public/private are allowed
+                }
             } else
-            { 
-                // If there's another value. 
+            {
+// raise error: parameter must be a string
             }
         }
     } //process_routes()
