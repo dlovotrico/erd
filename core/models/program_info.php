@@ -44,14 +44,14 @@ class Program_info
     #------> Objects 
     // ErrorHandler         - called from the root class.
 
-    
+
 
     public function __construct() 
     { 
         ##--------------------------[LOADING AND PROCESSING THE CONFIGURATION]
         // see $this->getConfigVars() for more
         require_once CORE_PATH.'settings.php';
-        require_once CORE_PATH.'pconfig.php';
+        require_once INTERNALS_PATH.'pconfig.php';
 
         #--------------> Extracting controllers from the config
         $this->process_routes($controllers);        
@@ -106,7 +106,8 @@ class Program_info
                 }
             } else
             {
-// raise error: parameter must be a string
+                // Kills the program if the controller params aren't strings.
+                Error_handler::add_error(2001);
             }
         }
     } //process_routes()
@@ -153,7 +154,6 @@ print_r($this->_controllers);
     // Check if the value is a string 
         // If yes: validate for the file existence
         // If no:  
-echo "<br /><br />KEY:".$key;  
 
 
             } else

@@ -86,8 +86,7 @@ class Init {
 
 // ------------------------------> [TEMPORAL DEBUGGING BOX]
 Error_handler::add_alert(1001);
-Error_handler::add_alert(1001);
-Error_handler::add_alert(1002);
+
 
 
 

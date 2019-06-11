@@ -2,14 +2,11 @@
 
 /**
  * <h1>START POINT</h1>
- * This interface calls <em>init()</em> which is the app's loading module, also called the <strong>INIT CORE</strong>. Besides 
- * defining some path information this file doesn't do much else other than instantiating the <em>Init()</em> 
- * bootstrapper core.
+ * <p>Defines program constant and calls the <em>Init()</em> bootstrapper.</p>
  *
- *   
- * ----
- * 
- * 
+ *
+ *
+ *
  * @author          D.Lovotrico <dlov@nucleoid.net>
  * 
  * @category    Bootstrap
@@ -20,8 +17,6 @@
  */
 
 
-
-
 // --------> [PATHS]
 define('CORE_PATH',     'core/');
 define('CONTENT_PATH',  'content/');
@@ -29,6 +24,7 @@ define('CONTENT_PATH',  'content/');
 define('CONTROLLERS_PATH',  CORE_PATH.'controllers/');
 define('MODELS_PATH',       CORE_PATH.'models/');
 define('VIEWS_PATH',        CORE_PATH.'views/');
+define('INTERNALS_PATH',    CORE_PATH.'internals/');
 define('LIBS_PATH',         CORE_PATH.'libs/');
 define('TOOLS_PATH',        CORE_PATH.'tools/');
 

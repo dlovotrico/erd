@@ -10,11 +10,14 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  * 
  * 
  * 
+ * 
  * <h2>[WORKING NOTES]</h2>
  * <ul>
  *   <li>The behavior may changed depending the configured security level.</li>
  *   <li>The <code>Error_handler()</code> not always kills the program. If the error code isn't a kill error.</li>
  * </ul>
+ * 
+ * 
  * 
  * <h2>[ERROR CODES]</h2>
  * <p>See documentation</p>
@@ -26,21 +29,21 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  *
  * @version         0.1
  * @since           0.1
-
+ *
  */
 
 
 
 class Error_handler {    
     #------> Data    
-    private static $_reported   = array();  
+    private static $_reported       = array();  
     #------> Objects 
     private static $_singleton;
-
+    private static $Error_data      = null;
     
     
     private function __construct() {
-        // Construct...
+        self::$Error_data  = new Error_data();
     } // __construct()
 
 
@@ -69,6 +72,7 @@ class Error_handler {
     * <code>$_reported</code>.</p>
     * 
     * 
+    *
     * <h2>[WORKING NOTES]</h2>
     * <ul>
     *   <li>The method creates a new entry each time an error/alert code is called then stores it into 
@@ -102,13 +106,20 @@ class Error_handler {
             self::$_reported[$type][$code] = array();
         }
 
+// ---------------------------------------------------------------------------------------------
+        // Get the error code information.
+
+        
+// MERGE IF NOT NULL 
+
+        $report = array_merge($report, self::$Error_data->get_error_information($code) );
+
+
+print_r($report);
+
         // Add the error/alert to the reported errors array. 
         array_push(self::$_reported[$type][$code], $report);
     } //process_report()
-
-
-
-
 
 
 

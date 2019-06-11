@@ -46,6 +46,6 @@ define('INFO_COPYRIGHT', 'Creative Commons License');
 
 # - Accepted controller domains: default, public, private. 
 # - Any other domain will be ignored.
-$controllers['default'] =   'frontpage';          // Default controller
+$controllers['default'] =   array();          // Default controller
 $controllers['public']  =   'frontpage|test';     
 $controllers['private'] =   'admin';

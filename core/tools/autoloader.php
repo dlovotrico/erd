@@ -2,7 +2,6 @@
 if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 
 
-
 /**
  * <h1>Autoloader<h1>
  * - Autoloads classes dynamically. 
@@ -36,6 +35,10 @@ spl_autoload_register(function ($class) {
 
     elseif(file_exists(VIEWS_PATH.$class.'.php')) {
         include_once VIEWS_PATH.$class.'.php';
+    }
+
+    elseif(file_exists(INTERNALS_PATH.$class.'.php')) {
+        include_once INTERNALS_PATH.$class.'.php';
     }
 
     elseif(file_exists(TOOLS_PATH.$class.'.php')) {
