@@ -85,6 +85,13 @@ class Init {
 
 
 // ------------------------------> [TEMPORAL DEBUGGING BOX]
+Error_handler::add_alert(1001);
+Error_handler::add_alert(1001);
+Error_handler::add_alert(1002);
+
+
+
+
 echo $this->User_info->get_url_params('id')."<br />";
 echo $this->User_info->get_url_params('title')."<br />";
 echo $this->User_info->get_url_params('subitem')."<br />";

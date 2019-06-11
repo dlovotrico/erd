@@ -60,9 +60,6 @@ class Program_info
         $this->validate_routes();        
         $this->_database                = $database;
 
-        echo "Test errorr:";
-        Error_handler::active();
-
 
     } //  __construct()
 
@@ -105,10 +102,7 @@ class Program_info
                         $this->_controllers['private']   = explode("|", $routes['private']);
                         break;                        
                     default:
-
-                    // Add the alert 
-                    
-                        ($alertTriggered == 1 ? Error_handler::addAlert(1001,'test') : $alertTriggered = 1);
+                        ($alertTriggered == 1 ? Error_handler::add_alert(1001) : $alertTriggered = 1);
                 }
             } else
             {

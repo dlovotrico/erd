@@ -13,7 +13,7 @@
  * @author          D.Lovotrico <dlov@nucleoid.net>
  * 
  * @category    Bootstrap
- * @category    System, Init 
+ * @category    System, Init
  *                      
  * @version     0.1
  * @since       0.1
