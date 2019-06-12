@@ -88,7 +88,7 @@ class Program_info
 
         foreach ($routes as $key => $val) 
         {
-            if(gettype($routes['default']) == 'string')
+            if(gettype($routes[$key]) == 'string')
             {
                 switch ($key) 
                 {

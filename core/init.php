@@ -32,42 +32,28 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  * 
  * 
  * 
- * <h2>[CONFIGURATION]</h2>
- * </ul>
- *   <li><strong><code>core/settings.php<code></strong>             - user configuration options and settings.
- *   <li><strong><code>core/pconfig.php<code></strong>              - contains the internal program configuration data.
- *   <li><strong><code>core/models/Program_info.php<code></strong>    - feeds program information params into the system.
- *   <li><strong><code>core/models/User_info.php<code></strong>       - feeds user information params into the system.
- * </ul>
- * 
- * 
  * 
  * @author          D.Lovotrico <dlov@nucleoid.net>
  * 
- * @version     Version 0.1
- * @since       Version 0.1
- * 
- * @category    Bootstrap
- * @category    System
+ * @version         Version 0.1
+ * @since           Version 0.1
+ *
+ * @category        System
+ * @category        Program execution
  */
 
  
 class Init {
-    #------> Data
     #------> Objects 
-    private $Session;                      // - session data. // TO IMPLEMENT
     private $Error_handler     = null;     // - Stores the Error_handler() class.    
     private $Program_info      = null;     // - Stores the Program_info() class.
-    private $User_info         = null;     // - Stores the Program_info() class.
+    private $User_info         = null;     // - Stores the User_info() class.
 
 
     public function __construct() {    
         require_once TOOLS_PATH.'autoloader.php';
         // --------> [LOADING THE SYSTEM TOOLS]
-        // --> Singleton classes.
         $this->Error_handler    = Error_handler::getInstance();
-
-        // --> Instance specific classes.
         $this->Program_info     = new Program_info();     
         $this->User_info        = new User_info();     
 
@@ -85,28 +71,43 @@ class Init {
 
 
 // ------------------------------> [TEMPORAL DEBUGGING BOX]
-Error_handler::add_alert(1001);
+
+// --------------------------------------------------------------------[URL TEST]
+echo "<br /><br /><br />RAW GET ARRAY:<br />";
+print_r($_GET); 
 
 
+echo "<br />Processed URL params:<br />";
+print_r($this->User_info->get_available_url_params()); 
 
 
-
+echo "<br />URL individual params:<br />";
 echo $this->User_info->get_url_params('id')."<br />";
 echo $this->User_info->get_url_params('title')."<br />";
 echo $this->User_info->get_url_params('subitem')."<br />";
 
-echo "<br /><br />";
-print_r($this->User_info->get_available_url_params()); 
 
 
-echo "<br /><br />";
-print_r($_GET); 
+// --------------------------------------------------------------------[ERRORS TEST]
+// Error_handler::add_alert(1001);
+Error_handler::add_error(3001);
+Error_handler::add_error(2001);
+//Error_handler::add_error(2001);
+
+
+echo "<br /><br /><br />ERROR ARRAY:<br /><pre>";
+print_r(Error_handler::get_all_errors() );
+echo "</pre>";
+
+
+
+
 
 
 // echo '<div class="dbox">';
 // Ot::str(' Controller: <small><b>'.$this->_contName.'</b></small> ');
 // Ot::str(' -- Item ID: <small>'.$this->_id.'</small> ');
-echo '</div>';
+// echo '</div>';
 // ---------------------------------------------------------------------------->        
 
 

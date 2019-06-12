@@ -9,11 +9,11 @@
  *
  * @author          D.Lovotrico <dlov@nucleoid.net>
  * 
- * @category    Bootstrap
- * @category    System, Init
- *                      
- * @version     0.1
- * @since       0.1
+ * @version         Version 0.1
+ * @since           Version 0.1
+ *
+ * @category        System
+ * @category        Program execution
  */
 
 

@@ -2,7 +2,6 @@
 if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 
 
-
 /**
  * <h1>ERROR MANAGEMENT AND HANDLING</h1>
  * <p>Receives errors and alerts from all modules, controllers, etc. and collects them and also reports them if needed.
@@ -10,11 +9,9 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  * 
  * 
  * 
- * 
  * <h2>[WORKING NOTES]</h2>
  * <ul>
  *   <li>The behavior may changed depending the configured security level.</li>
- *   <li>The <code>Error_handler()</code> not always kills the program. If the error code isn't a kill error.</li>
  * </ul>
  * 
  * 
@@ -26,10 +23,13 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  * 
  *  
  * @author          D.Lovotrico <dlov@nucleoid.net>
+ * 
+ * @version         Version 0.1
+ * @since           Version 0.1
  *
- * @version         0.1
- * @since           0.1
- *
+ * @category        System
+ * @category        Program execution
+ * @category        Program control
  */
 
 
@@ -93,32 +93,31 @@ class Error_handler {
     * @param       string      $info optional additional information about the error.
     */
     private static function process_report($type, $code,$info = null) {
-        $report = array();
-        ($type == 'alert' ? $type = 'alerts' : $type = 'errors');
+        $errorData  = array();
 
-        // Backtracing the error
-        $report['file']     = debug_backtrace()[1]['file'];
-        $report['function'] = debug_backtrace()[1]['function'];
-        $report['line']     = debug_backtrace()[1]['line'];
+        // Get the error/alert code information. 
+        $errorData  = self::$Error_data->get_information($type, $code);
+        // If that failed then bring the information for the default error/alert code.
+        if($errorData == null) {
+            $code = 9999;
+            $errorData  = self::$Error_data->get_information($type,9999);
+        }
+        // Backtracing the error/alert
+        $errorData['file']      = debug_backtrace()[1]['file'];
+        $errorData['function']  = debug_backtrace()[1]['function'];
+        $errorData['line']      = debug_backtrace()[1]['line'];
+        // Adding the code and type to the error data.
+        $errorData['code']      = $code;
+        $errorData['type']      = $type;
 
-        // Create the array entry if needed.
-        if(self::$_reported[$type][$code] == null) {
-            self::$_reported[$type][$code] = array();
+        // Create the $_reported array entry if needed.
+        if(self::$_reported[($type == 'alert' ? 'alerts' : 'errors')][$code] == null) {
+            // But only if the error code exists
+            self::$_reported[($type == 'alert' ? 'alerts' : 'errors')][$code] = array();
         }
 
-// ---------------------------------------------------------------------------------------------
-        // Get the error code information.
-
-        
-// MERGE IF NOT NULL 
-
-        $report = array_merge($report, self::$Error_data->get_error_information($code) );
-
-
-print_r($report);
-
-        // Add the error/alert to the reported errors array. 
-        array_push(self::$_reported[$type][$code], $report);
+        // Add the error/alert into the reported errors array. 
+        array_push(self::$_reported[($type == 'alert' ? 'alerts' : 'errors')][$code], $errorData);
     } //process_report()
 
 
@@ -172,18 +171,9 @@ print_r($report);
     * @since       0.1
     *
     */
-    public static function get_error() {
-        return self::$_reportedErrors;
-    } // get_error()
-
-
-
-// TEST DELETE
-public static function active() {
-    echo "active";
-}
-
-
+    public static function get_all_errors() {
+        return self::$_reported;
+    } // get_all_errors()
 
 } // Error()
 

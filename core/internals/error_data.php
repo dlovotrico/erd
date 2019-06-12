@@ -49,9 +49,13 @@ class Error_data
     private function error_information($code)
     {
         $errorData = array();
-
+echo "------------";
         switch ($code) 
         {
+            case 9999:
+                $errorData['message']   =   'Generic error. Error code does not exist.';
+                $errorData['severity']  =   1;
+                break;
             case 1001:
                 $errorData['message']   =   'Missing theme file.';
                 $errorData['severity']  =   1;
@@ -61,7 +65,39 @@ class Error_data
                 $errorData['severity']  =   1;
                 break;                
             default:
-                // Do nothing.
+                $errorData = null;
+        }
+
+        return $errorData;
+    } // error_information()
+
+
+
+    /**
+    * <h3>ALERT  MESSAGE AND SEVERITY CONTAINER</h3>
+    * <p>Contains the description and severity levels for each alert code.</p>
+    * 
+    *
+    * 
+    * @version     0.1
+    * @since       0.1
+    * 
+    * @access      private
+    *
+    * @param       int          $code the requested alert code.
+    */
+    private function alert_information($code)
+    {
+        $errorData = array();
+
+        switch ($code) 
+        {
+            case 9999:
+                $errorData['message']   =   'Generic alert. Alert code does not exist.';
+                $errorData['severity']  =   1;
+                break;         
+            default:
+                $errorData = null;
         }
 
         return $errorData;
@@ -71,11 +107,12 @@ class Error_data
 
 
 
+
 ##
 ##--------------------------------------------------------------------[PUBLIC METHODS]
 ##
     /**
-    * <h3>RETURNS ERROR INFORMATION</h3>
+    * <h3>RETURNS ERROR/ALERT INFORMATION</h3>
     * 
     * 
     * 
@@ -86,10 +123,14 @@ class Error_data
     *
     * @param       int          $code the requested error code.
     */
-    public function get_error_information($code) {
-        return self::error_information($code);
-    } // get_error_information()
-
-
+    public function get_information($type, $code) {
+        if($type === 'error')
+        {
+            return self::error_information($code);
+        } elseif($type === 'alert')
+        {
+            return self::alert_information($code);
+        }
+    } // get_information()
 
 } //Error_data()
