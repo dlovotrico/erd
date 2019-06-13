@@ -119,6 +119,9 @@ class Error_handler {
 
         // Add the error/alert into the reported errors array. 
         array_push(self::$_reported[($type == 'alert' ? 'alerts' : 'errors')][$code], $errorData);
+
+echo "REMEMBER TO REPORT THE ERROR TO THE EXECUTOR";
+
     } //process_report()
 
 
@@ -138,8 +141,8 @@ class Error_handler {
     * 
     * @access       public
     *
-    * @param        int         $code   Type of the reported error. 
-    * @param        string      $extra  Any additional/custom information to be included in the error message. 
+    * @param        int         $code       Type of the reported error. 
+    * @param        string      $extra      Any additional/custom information to be included in the error message. 
     */
     public static function add_error($code,$extra = null) {
         $callerMethod = debug_backtrace()[1]['function'];
@@ -160,8 +163,8 @@ class Error_handler {
     * 
     * @access       public
     *
-    * @param        int         $code   Type of the reported error. 
-    * @param        string      $extra  Any additional/custom information to be included in the error message. 
+    * @param        int         $code       Type of the reported error. 
+    * @param        string      $extra      Any additional/custom information to be included in the error message. 
     */
     public static function add_alert($code,$extra = null) {
         $callerMethod = debug_backtrace()[1]['function'];

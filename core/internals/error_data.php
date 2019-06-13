@@ -11,9 +11,11 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  * 
  *  
  * @author          D.Lovotrico <dlov@nucleoid.net>
+ * 
+ * @version         Version 0.1
+ * @since           Version 0.1
  *
- * @version         0.1
- * @since           0.1
+ * @category        Configuration
  *
  */
 
@@ -49,7 +51,7 @@ class Error_data
     private function error_information($code)
     {
         $errorData = array();
-echo "------------";
+
         switch ($code) 
         {
             case 9999:
@@ -96,6 +98,10 @@ echo "------------";
                 $errorData['message']   =   'Generic alert. Alert code does not exist.';
                 $errorData['severity']  =   1;
                 break;         
+            case 1001;
+                $errorData['message']   =   'The user requested controller does not exist.';
+                $errorData['severity']  =   5;
+                break;                     
             default:
                 $errorData = null;
         }

@@ -30,4 +30,17 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 
 class Executor {
     // Coming soon ...
+
+
+
+    // STAGES TO IMPLEMENT
+
+    // Did the init tools load correctly? 
+
+    
+    // Can the site's barebones structure be created? 
+
+
+
+
 } // Executor()
