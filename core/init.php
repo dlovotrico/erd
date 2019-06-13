@@ -91,7 +91,10 @@ echo $this->User_info->get_url_params('subitem')."<br />";
 // --------------------------------------------------------------------[ERRORS TEST]
 // Error_handler::add_alert(1001);
 Error_handler::add_error(3001);
-Error_handler::add_error(2001);
+
+
+Error_handler::add_alert(1001);
+Error_handler::add_alert(4001);
 //Error_handler::add_error(2001);
 
 

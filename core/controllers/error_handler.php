@@ -83,36 +83,37 @@ class Error_handler {
     *
     *
     *
-    * @version     0.1
-    * @since       0.1
+    * @version      0.1
+    * @since        0.1
     * 
-    * @access      private
+    * @access       private
     *
-    * @param       string      $type 'error' or 'alert'. 
-    * @param       int         $code the error code.
-    * @param       string      $info optional additional information about the error.
+    * @param        string      $type           'error' or 'alert'. 
+    * @param        int         $code           The error code.
+    * @param        string      $callerMethod   The name of the method generating the error/alert.
+    * @param        string      $extra          Optional additional information about the error.
     */
-    private static function process_report($type, $code,$info = null) {
+    private static function process_report($type, $code, $callerMethod, $extra = null) {
         $errorData  = array();
 
         // Get the error/alert code information. 
         $errorData  = self::$Error_data->get_information($type, $code);
         // If that failed then bring the information for the default error/alert code.
         if($errorData == null) {
-            $code = 9999;
+            $code       = 9999;
             $errorData  = self::$Error_data->get_information($type,9999);
         }
         // Backtracing the error/alert
         $errorData['file']      = debug_backtrace()[1]['file'];
-        $errorData['function']  = debug_backtrace()[1]['function'];
+        $errorData['function']  = $callerMethod;
         $errorData['line']      = debug_backtrace()[1]['line'];
-        // Adding the code and type to the error data.
+        // Adding the code, type and extra info to the error data.
         $errorData['code']      = $code;
         $errorData['type']      = $type;
+        $errorData['extra']     = $extra;
 
         // Create the $_reported array entry if needed.
         if(self::$_reported[($type == 'alert' ? 'alerts' : 'errors')][$code] == null) {
-            // But only if the error code exists
             self::$_reported[($type == 'alert' ? 'alerts' : 'errors')][$code] = array();
         }
 
@@ -129,36 +130,43 @@ class Error_handler {
 ##
     /**
     * <h3>REGISTER AN ERROR</h3>
+    * <p>Allows to register an error in the error report array.</p>
     * 
     * 
+    * @version      0.1
+    * @since        0.1
     * 
-    * @version     0.1
-    * @since       0.1
-    * 
-    * @access      public
+    * @access       public
     *
-    * @param       int $errorCode type of the reported error. 
+    * @param        int         $code   Type of the reported error. 
+    * @param        string      $extra  Any additional/custom information to be included in the error message. 
     */
-    public static function add_error($series,$info = null) {
-        self::process_report('error',$series, $info);
+    public static function add_error($code,$extra = null) {
+        $callerMethod = debug_backtrace()[1]['function'];
+
+        self::process_report('error',$code, $callerMethod, $extra);
     } // add_error()
 
 
 
     /**
     * <h3>REGISTER AN ALERT</h3>
+    * <p>Allows to register an alert in the alert report array.</p>
     * 
     * 
     * 
-    * @version     0.1
-    * @since       0.1
+    * @version      0.1
+    * @since        0.1
     * 
-    * @access      public
+    * @access       public
     *
-    * @param       int $errorCode type of the reported error. 
+    * @param        int         $code   Type of the reported error. 
+    * @param        string      $extra  Any additional/custom information to be included in the error message. 
     */
-    public static function add_alert($series,$info = null) {
-        self::process_report('alert',$series, $info);
+    public static function add_alert($code,$extra = null) {
+        $callerMethod = debug_backtrace()[1]['function'];
+
+        self::process_report('alert',$code, $callerMethod, $extra);
     } // add_alert()
 
 

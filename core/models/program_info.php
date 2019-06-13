@@ -60,7 +60,6 @@ class Program_info
         $this->validate_routes();        
         $this->_database                = $database;
 
-
     } //  __construct()
 
     
