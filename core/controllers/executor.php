@@ -29,7 +29,8 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  */
 
 class Executor {
-    // Coming soon ...
+    #------> Objects 
+    private static $Singleton;
 
 
 
@@ -42,5 +43,33 @@ class Executor {
 
 
 
+##
+##--------------------------------------------------------------------[PRIVATE METHODS]
+##
+    // --------> [SINGLETON]
+    public static function getInstance() {
+        if(is_null (self::$Singleton)) {
+            self::$Singleton = new Error_handler();
+        }
+        RETURN self::$Singleton;
+    } // getInstance()
+
+
+
+
+
+
+
+
+##
+##--------------------------------------------------------------------[PUBLIC METHODS]
+##
+    public function report_issue() {
+
+    }
+
+    public function report_state($code) {
+
+    }
 
 } // Executor()

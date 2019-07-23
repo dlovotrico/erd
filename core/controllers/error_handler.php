@@ -38,12 +38,13 @@ class Error_handler {
     #------> Data    
     private static $_reported       = array();  
     #------> Objects 
-    private static $_singleton;
+    private static $Singleton;
     private static $Error_data      = null;
     
     
     private function __construct() {
         self::$Error_data  = new Error_data();
+        
     } // __construct()
 
 
@@ -56,10 +57,10 @@ class Error_handler {
 ##
     // --------> [SINGLETON]
     public static function getInstance() {
-        if(is_null (self::$_singleton)) {
-            self::$_singleton = new Error_handler();
+        if(is_null (self::$Singleton)) {
+            self::$Singleton = new Error_handler();
         }
-        RETURN self::$_singleton;
+        RETURN self::$Singleton;
     } // getInstance()
 
 
@@ -119,6 +120,8 @@ class Error_handler {
 
         // Add the error/alert into the reported errors array. 
         array_push(self::$_reported[($type == 'alert' ? 'alerts' : 'errors')][$code], $errorData);
+
+
 
 echo "REMEMBER TO REPORT THE ERROR TO THE EXECUTOR";
 

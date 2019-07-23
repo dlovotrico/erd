@@ -45,18 +45,22 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  
 class Init {
     #------> Objects 
-    private $Error_handler     = null;     // - Stores the Error_handler() class.    
-    private $Program_info      = null;     // - Stores the Program_info() class.
-    private $User_info         = null;     // - Stores the User_info() class.
+    private $Error_handler      = null;     // - Stores the Error_handler() class. 
+    private $Executor           = null;     // - Stores the Executor() class. 
+    private $Program_info       = null;     // - Stores the Program_info() class.
+    private $User_info          = null;     // - Stores the User_info() class.
 
 
     public function __construct() {    
         require_once TOOLS_PATH.'autoloader.php';
         // --------> [LOADING THE SYSTEM TOOLS]
         $this->Error_handler    = Error_handler::getInstance();
+        $this->Executor         = Executor::getInstance();
+
         $this->Program_info     = new Program_info();     
         $this->User_info        = new User_info();     
 
+        $this->Executor->report_state(100);
 
 
 // MOVE ALL OF THIS OUTSIDE OF THE CONTRUCT()
@@ -133,5 +137,10 @@ echo "</pre>";
 
  
     } //  __construct()
+
+
+    public function tester() {
+echo "terrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr";
+    }
 }
 

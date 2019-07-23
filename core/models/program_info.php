@@ -59,7 +59,6 @@ class Program_info
         #--------------> Populating data
         $this->validate_routes();        
         $this->_database                = $database;
-
     } //  __construct()
 
     
@@ -263,13 +262,13 @@ echo "<br /><br />type not recognized<br />";
     * 
     * 
     *
-    * 
     * <h2>[WORKING NOTES]</h2>
     * <ul>
     *   <li>It returns the credentials one by one instead of all at once.</li>
     *   <li>Returns false if the credential doesn't exist..</li>
     * </ul>
     *  
+    *
     * 
     * @version     0.1
     * @since       0.1
