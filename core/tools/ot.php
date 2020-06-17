@@ -33,24 +33,31 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  */
 
 class Ot {
-    private static $_singleton;
+    #------> Objects 
+    private static $Singleton;
+
+    
     private function __construct()
     {
 
     }
 
 
-
     public static function getInstance() 
     {
-        IF (is_null (self::$_singleton))
+        if(is_null (self::$Singleton))
         {
-            self::$_singleton = new Ot(); 
+            self::$Singleton = new Ot(); 
         }
-        RETURN self::$_singleton;
-    }
+        RETURN self::$Singleton;
+    } // getInstance()
     
     
+
+
+
+    
+
     /**
      * Adds HTML elements to help formatting blocks. 
      * 
@@ -63,11 +70,11 @@ class Ot {
      * @param string $side  type of block
      * 
      */
-    public function bk($str,$side = b)
+    public function bk($str,$side = 'b')
     {
-        if($side == l OR b) echo "<br />";
+        if($side == 'l' OR 'b') echo "<br />";
         echo $str;
-        if($side == r OR b) echo "<br />";
+        if($side == 'r' OR 'b') echo "<br />";
     }
 
 
@@ -104,21 +111,21 @@ class Ot {
         {
             echo $str;
         }
-    }
+    } // str()
 
 
     public static function p($str)
     {
         echo "<p>".$str."</p>";
-    }
+    } // p()
 
 
     public static function title($str,$color = "000000",$size = 21)
     {
         echo "<p style='color:$color;font-size:$size"."px;font-weight: bold'>".$str."</p>";
-    }
+    } // title()
 
-}
+} // Ot()
 
 
 

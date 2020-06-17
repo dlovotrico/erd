@@ -35,21 +35,27 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 
 
 class Error_handler {    
-    #------> Data    
-    private static $_reported       = array();  
     #------> Objects 
     private static $Singleton;
     private static $Error_data      = null;
+    #------> Data    
+    private static $_reported       = array();  
+    
+
+// DELETE    
+private static $Status_logger      = null;     // - Stores the Status_logger() class.
     
     
+
+
     private function __construct() {
         self::$Error_data  = new Error_data();
         
+
+// DELETE
+self::$Status_logger    = Status_logger::getInstance();
+
     } // __construct()
-
-
-
-
 
 
 ##
@@ -66,12 +72,20 @@ class Error_handler {
 
 
 
+//DELETE
+public static function getc() {
+echo "<br />reporting statys<br />";
+    return self::$Status_logger->inform_state();
+} // get_all_errors()
+
+
+
+
 
     /**
     * <h3>PROCESS REPORT</h3>
     * <p>Takes all the data about the error or alert report, formats it into an array and then inserts it into
     * <code>$_reported</code>.</p>
-    * 
     * 
     *
     * <h2>[WORKING NOTES]</h2>
@@ -120,8 +134,6 @@ class Error_handler {
 
         // Add the error/alert into the reported errors array. 
         array_push(self::$_reported[($type == 'alert' ? 'alerts' : 'errors')][$code], $errorData);
-
-
 
 echo "REMEMBER TO REPORT THE ERROR TO THE EXECUTOR";
 
@@ -188,6 +200,13 @@ echo "REMEMBER TO REPORT THE ERROR TO THE EXECUTOR";
     public static function get_all_errors() {
         return self::$_reported;
     } // get_all_errors()
+
+
+
+
+
+
+
 
 } // Error()
 
