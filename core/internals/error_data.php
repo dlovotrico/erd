@@ -7,9 +7,6 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  * <p>Stores the error messages and their severity levels.</p> 
  * 
  * 
- * 
- * 
- *  
  * @author          D.Lovotrico <dlov@nucleoid.net>
  * 
  * @version         Version 0.1

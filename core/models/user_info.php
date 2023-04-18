@@ -37,7 +37,10 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 class User_info 
 {
     #------> Data
+    // - This array will store all the processed user data. And then be used to output 
+    //   all the information requests about the user made by the other modules. 
     private $_userRequest   = array();
+
     #------> Objects 
     private $_Sanitizer     = null;      // - Container for the Sanitizer() class.
 
@@ -46,7 +49,7 @@ class User_info
     {
         ##--------------------------[TOOLS]
         $this->_Sanitizer = new Sanitizer();
-
+echo "processing user request";
         #--------------> Populating data
         $this->process_user_request();
     }
@@ -59,9 +62,8 @@ class User_info
 ##
     /**
     * <h1>PROCESS THE USER REQUEST</h1>
-    * <p>Sanitizes the URL  sent by the user and then process the URL finding valid patterns within it for the ID, the
-    * controller and any suitable action. If found, it will populate the array <code>$_userRequest</code> with all the 
-    * data.</p>
+    * <p>Sanitizes and analizes the URL finding valid patterns within it for the ID, the controller and any suitable 
+    * action. If found, it will populate the array <code>$_userRequest</code> with all the data.</p>
     *
     * 
     * 
@@ -70,6 +72,7 @@ class User_info
     * <ul>
     *   <li>It doesn't return anything, but it populates the class <code>$_userRequest</code> array with the processed 
     *   URL sent by the user.</li>
+    *   <li>Requires Sanitizer() object</li>
     * </ul>
     *
     *

@@ -11,6 +11,7 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
  * 
  * <h2>[WORKING NOTES]</h2>
  * <ul>
+ *   <li>Error data and error severity levels are pooled from Error_data().</li>
  *   <li>The behavior may changed depending the configured security level.</li>
  * </ul>
  * 
@@ -37,25 +38,23 @@ if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 class Error_handler {    
     #------> Objects 
     private static $Singleton;
-    private static $Error_data      = null;
+    private static $Error_data          = null;
     #------> Data    
-    private static $_reported       = array();  
+    private static $_reported           = array();  
     
 
 // DELETE    
-private static $Status_logger      = null;     // - Stores the Status_logger() class.
+
     
     
 
 
     private function __construct() {
+        // Load the error messages and severity levels.
         self::$Error_data  = new Error_data();
-        
-
-// DELETE
-self::$Status_logger    = Status_logger::getInstance();
-
     } // __construct()
+
+
 
 
 ##
@@ -68,17 +67,6 @@ self::$Status_logger    = Status_logger::getInstance();
         }
         RETURN self::$Singleton;
     } // getInstance()
-
-
-
-
-//DELETE
-public static function getc() {
-echo "<br />reporting statys<br />";
-    return self::$Status_logger->inform_state();
-} // get_all_errors()
-
-
 
 
 

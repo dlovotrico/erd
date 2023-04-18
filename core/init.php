@@ -1,6 +1,10 @@
 <?php
 if(!defined('FROM_INDEX') ) { die("Execute from site's root."); }
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 /**
  * <h1>Bootstrapper</h1>
  * Bootstrapper, some of its tasks are:
@@ -57,38 +61,32 @@ class Init {
     private $User_info          = null;     // - Stores the User_info() class.
 
 
-    public function __construct() {    
+    public function __construct() {
+// BEGIN #indInit
         require_once TOOLS_PATH.'autoloader.php';
-        // --------> [LOADING THE SYSTEM TOOLS]
+        ##--------------------------[LOADING THE SYSTEM TOOLS]
         $this->Error_handler    = Error_handler::getInstance();
-        $this->Status_logger    = Status_logger::getInstance();
         $this->Program_info     = new Program_info();     
         $this->User_info        = new User_info();
-        
-        // --------> [INITIATING THE SYSTEM]        
-        $this->Status_logger->report_state(1001);
-        $this->Status_logger->report_state(1002);
-        $this->Status_logger->report_state(1003);
 
-        print_r($this->Error_handler->getc());
 
-        // --------> [USER REQUEST PROCESSING]
-        // ----> CONTROLLER IDENTIFICATION
-        // $this->_contName    = $this->_Program_info->get_controller();
-        // $this->_id          = $this->_Program_info->getId();
 
-        // ----> CONTROLLER LOADING
+
+        ##--------------------------[USER REQUEST PROCESSING]
+        #--------------> CONTROLLER IDENTIFICATION
+//        $this->_contName    = $this->_Program_info->get_controller();
+        $this->_id          = $this->_Program_info->getId();
+
+
+        #--------------> CONTROLLER LOADING
         // $this->_Controller  = new $this->_contName();
 
-
+// END #indInit
 
 
 
         
 Ot::title('Starting tests','red',21);
-
-
-
 
 
 

@@ -225,11 +225,9 @@ echo "<br /><br />type not recognized<br />";
     */
     public function get_controller() 
     {
-        // --> Check the controller requested by the user.
- 
  
 // !!!!!!!!! MOVED TO user_info !!!!!!!!!!!
-
+echo "ttt";
         $controller = strtolower($this->getUserVar('controller'));
         // --> GET var empty? Default controller is loaded then.
         (strlen($controller) == 0 ?  $controller = $this->_controllers['default'] : FALSE);
